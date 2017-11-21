@@ -1,0 +1,180 @@
+# depslib dependency file v1.0
+1266337486 source:c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\image.cpp
+	"image.h"
+	"lodepng.h"
+	<fstream>
+
+1266337486 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\image.h
+	<iostream>
+	"triple.h"
+
+1266337486 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\triple.h
+	<math.h>
+	<iostream>
+
+1266337486 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\lodepng.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<vector>
+	<string>
+	<fstream>
+	"lodepng.h"
+	<iostream>
+	"lodepng.h"
+	<iostream>
+	"lodepng.h"
+
+1266337486 source:c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\light.cpp
+	"light.h"
+
+1488376618 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\light.h
+	<iostream>
+	<limits>
+	"triple.h"
+
+1266337486 source:c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\lodepng.cpp
+	"lodepng.h"
+
+1266337486 source:c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\main.cpp
+	"raytracer.h"
+
+1266337486 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\raytracer.h
+	<iostream>
+	<string>
+	"triple.h"
+	"light.h"
+	"scene.h"
+	"yaml/yaml.h"
+
+1266337486 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\scene.h
+	<vector>
+	"triple.h"
+	"light.h"
+	"object.h"
+	"image.h"
+
+1266337486 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\object.h
+	"triple.h"
+	"light.h"
+
+1252191960 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\yaml.h
+	"crt.h"
+	"parser.h"
+	"node.h"
+	"iterator.h"
+	"emitter.h"
+	"stlemitter.h"
+	"exceptions.h"
+
+1252191960 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\crt.h
+	<stdlib.h>
+	<crtdbg.h>
+
+1255992290 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\parser.h
+	"node.h"
+	"parserstate.h"
+	"noncopyable.h"
+	<ios>
+	<string>
+	<vector>
+	<map>
+	<memory>
+
+1252274518 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\node.h
+	"conversion.h"
+	"exceptions.h"
+	"iterator.h"
+	"mark.h"
+	"noncopyable.h"
+	"parserstate.h"
+	<iostream>
+	<string>
+	<vector>
+	<map>
+	<memory>
+	"nodeimpl.h"
+	"nodereadimpl.h"
+
+1252274518 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\conversion.h
+	"null.h"
+	<string>
+	<sstream>
+
+1252191960 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\null.h
+
+1252191960 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\exceptions.h
+	"mark.h"
+	<exception>
+	<string>
+	<sstream>
+
+1252191960 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\mark.h
+
+1252191960 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\iterator.h
+
+1252191960 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\noncopyable.h
+
+1252191960 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\parserstate.h
+	<string>
+	<map>
+
+1255324874 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\nodeimpl.h
+	"nodeutil.h"
+
+1252191960 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\nodeutil.h
+
+1255324874 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\nodereadimpl.h
+
+1255994388 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\emitter.h
+	"emittermanip.h"
+	"ostream.h"
+	"null.h"
+	<memory>
+	<string>
+
+1255994388 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\emittermanip.h
+	<string>
+
+1252191960 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\ostream.h
+	<string>
+
+1252191960 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\yaml\stlemitter.h
+	<vector>
+	<list>
+	<map>
+
+1266337486 source:c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\material.cpp
+	"material.h"
+
+1266337486 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\material.h
+	<iostream>
+	"triple.h"
+
+1267868434 source:c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\raytracer.cpp
+	"raytracer.h"
+	"object.h"
+	"sphere.h"
+	"material.h"
+	"light.h"
+	"image.h"
+	"yaml/yaml.h"
+	<ctype.h>
+	<fstream>
+	<assert.h>
+
+1266337486 c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\sphere.h
+	"object.h"
+
+1267184452 source:c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\scene.cpp
+	"scene.h"
+	"material.h"
+
+1487597901 source:c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\sphere.cpp
+	"sphere.h"
+	<iostream>
+	<math.h>
+
+1266337486 source:c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\triple.cpp
+	"triple.h"
+
