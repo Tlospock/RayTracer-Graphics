@@ -178,3 +178,436 @@
 1266337486 source:c:\users\tlos\documents\project\graphicsraytracer\graphicsraytracer\triple.cpp
 	"triple.h"
 
+1511285761 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\main.cpp
+	"raytracer.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\raytracer.h
+	<iostream>
+	<string>
+	"triple.h"
+	"light.h"
+	"scene.h"
+	"yaml/yaml.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\triple.h
+	<math.h>
+	<iostream>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\light.h
+	<iostream>
+	<limits>
+	"triple.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\scene.h
+	<vector>
+	"triple.h"
+	"light.h"
+	"object.h"
+	"image.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\object.h
+	"triple.h"
+	"light.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\image.h
+	<iostream>
+	"triple.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\yaml.h
+	"crt.h"
+	"parser.h"
+	"node.h"
+	"iterator.h"
+	"emitter.h"
+	"stlemitter.h"
+	"exceptions.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\crt.h
+	<stdlib.h>
+	<crtdbg.h>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\parser.h
+	"node.h"
+	"parserstate.h"
+	"noncopyable.h"
+	<ios>
+	<string>
+	<vector>
+	<map>
+	<memory>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\node.h
+	"conversion.h"
+	"exceptions.h"
+	"iterator.h"
+	"mark.h"
+	"noncopyable.h"
+	"parserstate.h"
+	<iostream>
+	<string>
+	<vector>
+	<map>
+	<memory>
+	"nodeimpl.h"
+	"nodereadimpl.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\conversion.h
+	"null.h"
+	<string>
+	<sstream>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\null.h
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\exceptions.h
+	"mark.h"
+	<exception>
+	<string>
+	<sstream>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\mark.h
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\iterator.h
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\noncopyable.h
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\parserstate.h
+	<string>
+	<map>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\nodeimpl.h
+	"nodeutil.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\nodeutil.h
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\nodereadimpl.h
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\emitter.h
+	"emittermanip.h"
+	"ostream.h"
+	"null.h"
+	<memory>
+	<string>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\emittermanip.h
+	<string>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\ostream.h
+	<string>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\stlemitter.h
+	<vector>
+	<list>
+	<map>
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\image.cpp
+	"image.h"
+	"lodepng.h"
+	<fstream>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\lodepng.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<vector>
+	<string>
+	<fstream>
+	"lodepng.h"
+	<iostream>
+	"lodepng.h"
+	<iostream>
+	"lodepng.h"
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\light.cpp
+	"light.h"
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\lodepng.cpp
+	"lodepng.h"
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\material.cpp
+	"material.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\material.h
+	<iostream>
+	"triple.h"
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\raytracer.cpp
+	"raytracer.h"
+	"object.h"
+	"sphere.h"
+	"material.h"
+	"light.h"
+	"image.h"
+	"yaml/yaml.h"
+	<ctype.h>
+	<fstream>
+	<assert.h>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\sphere.h
+	"object.h"
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\scene.cpp
+	"scene.h"
+	"material.h"
+
+1511476494 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\sphere.cpp
+	"sphere.h"
+	<iostream>
+	<math.h>
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\triple.cpp
+	"triple.h"
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\aliascontent.cpp
+	"crt.h"
+	"aliascontent.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\aliascontent.h
+	"content.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\content.h
+	<vector>
+	<map>
+	"parserstate.h"
+	"exceptions.h"
+	"ltnode.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\ltnode.h
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\content.cpp
+	"crt.h"
+	"content.h"
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\conversion.cpp
+	"conversion.h"
+	<algorithm>
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\emitter.cpp
+	"emitter.h"
+	"emitterstate.h"
+	"emitterutils.h"
+	"indentation.h"
+	"exceptions.h"
+	<sstream>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\emitterstate.h
+	"setting.h"
+	"emittermanip.h"
+	<cassert>
+	<vector>
+	<stack>
+	<memory>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\setting.h
+	<memory>
+	<vector>
+	"noncopyable.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\emitterutils.h
+	"ostream.h"
+	<string>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\indentation.h
+	"ostream.h"
+	<iostream>
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\emitterstate.cpp
+	"emitterstate.h"
+	"exceptions.h"
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\emitterutils.cpp
+	"emitterutils.h"
+	"exp.h"
+	"indentation.h"
+	"exceptions.h"
+	"stringsource.h"
+	<sstream>
+	<iomanip>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\exp.h
+	"regex.h"
+	<string>
+	<ios>
+	"stream.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\regex.h
+	<vector>
+	<string>
+	"regeximpl.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\regeximpl.h
+	"stream.h"
+	"stringsource.h"
+	"streamcharsource.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\stream.h
+	"noncopyable.h"
+	"mark.h"
+	<deque>
+	<ios>
+	<string>
+	<iostream>
+	<set>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\stringsource.h
+	<cstddef>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\streamcharsource.h
+	"noncopyable.h"
+	<cstddef>
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\exp.cpp
+	"crt.h"
+	"exp.h"
+	"exceptions.h"
+	<sstream>
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\iterator.cpp
+	"crt.h"
+	"node.h"
+	"exceptions.h"
+	"iterpriv.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\iterpriv.h
+	"ltnode.h"
+	<vector>
+	<map>
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\map.cpp
+	"crt.h"
+	"map.h"
+	"node.h"
+	"scanner.h"
+	"token.h"
+	"exceptions.h"
+	"emitter.h"
+	<memory>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\map.h
+	"content.h"
+	<map>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\scanner.h
+	<ios>
+	<string>
+	<queue>
+	<stack>
+	<set>
+	<map>
+	"stream.h"
+	"token.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\token.h
+	"mark.h"
+	<ios>
+	<string>
+	<vector>
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\node.cpp
+	"crt.h"
+	"node.h"
+	"token.h"
+	"scanner.h"
+	"content.h"
+	"parser.h"
+	"scalar.h"
+	"sequence.h"
+	"map.h"
+	"aliascontent.h"
+	"iterpriv.h"
+	"emitter.h"
+	<stdexcept>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\scalar.h
+	"content.h"
+	<string>
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\sequence.h
+	"content.h"
+	<vector>
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\null.cpp
+	"null.h"
+	"node.h"
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\ostream.cpp
+	"ostream.h"
+	<cstring>
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\parser.cpp
+	"crt.h"
+	"parser.h"
+	"scanner.h"
+	"token.h"
+	"exceptions.h"
+	<sstream>
+	<cstdio>
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\parserstate.cpp
+	"crt.h"
+	"parserstate.h"
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\regex.cpp
+	"crt.h"
+	"regex.h"
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\scalar.cpp
+	"crt.h"
+	"scalar.h"
+	"scanner.h"
+	"token.h"
+	"exceptions.h"
+	"node.h"
+	"emitter.h"
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\scanner.cpp
+	"crt.h"
+	"scanner.h"
+	"token.h"
+	"exceptions.h"
+	"exp.h"
+	<cassert>
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\scanscalar.cpp
+	"crt.h"
+	"scanscalar.h"
+	"scanner.h"
+	"exp.h"
+	"exceptions.h"
+	"token.h"
+
+1511285582 c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\scanscalar.h
+	<string>
+	"regex.h"
+	"stream.h"
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\scantoken.cpp
+	"crt.h"
+	"scanner.h"
+	"token.h"
+	"exceptions.h"
+	"exp.h"
+	"scanscalar.h"
+	<sstream>
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\sequence.cpp
+	"crt.h"
+	"sequence.h"
+	"node.h"
+	"scanner.h"
+	"token.h"
+	"emitter.h"
+	<stdexcept>
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\simplekey.cpp
+	"crt.h"
+	"scanner.h"
+	"token.h"
+	"exceptions.h"
+	"exp.h"
+
+1511285582 source:c:\users\pierre-antoine\desktop\graphics\raytracer-graphics\yaml\stream.cpp
+	"crt.h"
+	"stream.h"
+	<iostream>
+	"exp.h"
+
