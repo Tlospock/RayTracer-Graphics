@@ -9,9 +9,9 @@
 //    Maarten Everts
 //    Jasper van de Gronde
 //
-//  This framework is inspired by and uses code of the raytracer framework of 
+//  This framework is inspired by and uses code of the raytracer framework of
 //  Bert Freudenberg that can be found at
-//  http://isgwww.cs.uni-magdeburg.de/graphik/lehre/cg2/projekt/rtprojekt.html 
+//  http://isgwww.cs.uni-magdeburg.de/graphik/lehre/cg2/projekt/rtprojekt.html
 //
 
 #include "scene.h"
@@ -38,6 +38,8 @@ Color Scene::trace(const Ray &ray)
     Vector N = min_hit.N;                          //the normal at hit point
     Vector V = -ray.D;                             //the view vector
 
+    /** Normalizing N*/
+    N.normalize();
 
     /****************************************************
     * This is where you should insert the color
@@ -56,10 +58,52 @@ Color Scene::trace(const Ray &ray)
     *        Color*Color        dito
     *        pow(a,b)           a to the power of b
     ****************************************************/
+    Color I = Color(0, 0, 0);
 
-    Color color = material->color;                  // place holder
+    for(unsigned int i=0; i<lights.size(); ++i)
+    {
+        /** Vector to light */
+        Vector L = lights[i]->position - hit;
 
-    return color;
+        /** Vector of reflected light */
+        Vector reflectionVector = L - 2*(L.dot(N))*N;
+        reflectionVector.normalize();
+
+        // Vector of refraction (to do later)
+
+        /** Normalization of light vector*/
+        L.normalize();
+
+        /** Get light color */
+        Color lightColor = lights[i]->color;
+        Color materialColor = material->color;
+
+        /**
+         *  Phong diffuse Kd * I (L . N), with teta the angle between L & N(diffuse reflection), and phi the angle between R & V(perceived brightness)
+         * I ~= cos teta = L . N for normalized L, N
+         *
+         */
+        Color iDiffuse = max(0.0, L.dot(N)) * materialColor;
+
+        /**
+         *  Phong ambient Ka * I
+         *  https://www.tomdalling.com/blog/modern-opengl/07-more-lighting-ambient-specular-attenuation-gamma/
+         */
+         Color iAmbient = lightColor * materialColor;
+
+        /**
+         *  Phong specular Ks * I (R . V)^n
+         */
+        Color iSpecular = pow(max(0.0, reflectionVector.dot(V)), material->n) * lightColor;
+
+        /** Phong illumination */
+        I += material->kd * iDiffuse + material->ka * iAmbient /*+ material->ks * iSpecular*/;
+
+    }
+
+    //Color color = material->color;                  // place holder
+
+    return I;
 }
 
 void Scene::render(Image &img)
