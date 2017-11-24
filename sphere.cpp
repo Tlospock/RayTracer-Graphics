@@ -43,47 +43,45 @@ Hit Sphere::intersect(const Ray &ray)
 
 
 
-    /*Our sphere's equation is square(position.x)+square(position.y)+square(position.z)-square(r)=0
+    /*Our sphere's equation is square(||x-position||)-square(r)=0
     *The vector's parametric equation is :
-    * x(t)=ray.D.x*t+ray.O.x
-    * y(t)=ray.D.y*t+ray.O.y
-    * z(t)=ray.D.z*t+ray.O.z
+    * X(t)=ray.D*t+ray.O
     *
     * So we must solve :
-    * (ray.D.x*t+ray.O.x)²+(ray.D.y*t+ray.O.y)²+(ray.D.z*t+ray.O.z)-(r*r)=0
-    * <=> (D.x²+D.y²+D.z²)*t² + 2*(D.x*O.x+D.y*O.y+D.z*O.z)*t + O.x²+O.y²+O.z²-r² = 0
-    * delta = (2*(D.x*O.x+D.y*O.y+D.z*O.z))² - 4*(D.x²+D.y²+D.z²)*(O.x²+O.y²+O.z²-r²)
+    * square(||ray.D*t+ray.O-position||) - square(r)  = 0
+    * <=> square(||ray.D||)*square(t)+2*ray.D*(ray.O-position)*t+square(||ray.O-position||)-square(r) = 0
+    * We can solve this easily using delta.
+    * Once it's done, we use the solution in the vector's parametric equation to find the intersection(s)
+    * Then we can calculate the distance between the closest intersection and the ray origins
     */
-    //Vector OC = (position - ray.O).normalized();
+    Vector N;
+    double t;
 
     double A = ray.D.length_2();
-    double B = 2*(ray.D.dot(OC));
-    double C = OC.length_2()-r*r-;
-
-    //double A = pow(ray.D.x,2)+pow(ray.D.y,2)+pow(ray.D.z,2);
-    //double B = 2*(ray.D.x*OC.x+ray.D.y*OC.y+ray.D.z*OC.z);
-    //double C = pow(OC.x,2)+pow(OC.y,2)+pow(OC.z,2)-r*r;
-
-    Vector N;
+    double B = 2*(ray.D.dot(ray.O - position));
+    double C = (ray.O-position).length_2()-r*r;
 
     double delta = pow(B,2)-(4*A*C);
-    if(delta > 0){
+    if(delta < 0){
+        //no intersection
         return Hit::NO_HIT();
     }
     else if(delta == 0){
+        //1 intersection
         double solution = -B/(2*A);
-        Point inters = (ray.D * solution) + OC;
-        double distance = sqrt(pow((ray.D.x-inters.x), 2) + pow((ray.D.y-inters.y), 2) + pow((ray.D.z-inters.z),2));
-        return Hit(distance, N);
+        Point inters = (ray.D * solution) + ray.O;
+        double distance = (ray.O-inters).length();
+        t = Hit(distance, N);
     }
     else{
+        //2 intersections
         double solution1 = (-B-sqrt(delta))/(2*A);
         double solution2 = (-B+sqrt(delta))/(2*A);
-        Point inters1 = (ray.D * solution1) + OC;
-        Point inters2 = (ray.D * solution2) + OC;
-        double distance1 = sqrt(pow((ray.D.x-inters1.x), 2) + pow((ray.D.y-inters1.y), 2) + pow((ray.D.z-inters1.z),2));
-        double distance2 = sqrt(pow((ray.D.x-inters2.x), 2) + pow((ray.D.y-inters2.y), 2) + pow((ray.D.z-inters2.z),2));
-        return (distance1 < distance2) ? Hit(distance1, N) : Hit(distance2, N);
+        Point inters1 = (ray.D * solution1) + ray.O;
+        Point inters2 = (ray.D * solution2) + ray.O;
+        double distance1 = (ray.O-inters1).length();
+        double distance2 = (ray.O-inters2).length();
+        t = (distance1 < distance2) ? Hit(distance1, N) : Hit(distance2, N);
     }
 
 
