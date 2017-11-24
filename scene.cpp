@@ -66,7 +66,7 @@ Color Scene::trace(const Ray &ray)
         Vector L = lights[i]->position - hit;
 
         /** Vector of reflected light */
-        Vector reflectionVector = L - 2*(L.dot(N))*N;
+        Vector reflectionVector = 2*(L.dot(N))*N -L;
         reflectionVector.normalize();
 
         // Vector of refraction (to do later)
@@ -94,10 +94,10 @@ Color Scene::trace(const Ray &ray)
         /**
          *  Phong specular Ks * I (R . V)^n
          */
-        Color iSpecular = pow(max(0.0, reflectionVector.dot(V)), material->n) * lightColor;
+        Color iSpecular = pow(max(0.0, V.dot(reflectionVector)), material->n) * lightColor;
 
         /** Phong illumination */
-        I += material->kd * iDiffuse + material->ka * iAmbient /*+ material->ks * iSpecular*/;
+        I += material->kd * iDiffuse + material->ka * iAmbient + material->ks * iSpecular;
 
     }
 
