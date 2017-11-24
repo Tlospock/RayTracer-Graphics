@@ -54,8 +54,9 @@ Hit Sphere::intersect(const Ray &ray)
     * Once it's done, we use the solution in the vector's parametric equation to find the intersection(s)
     * Then we can calculate the distance between the closest intersection and the ray origins
     */
-    Vector N;
+
     double t;
+    Point intersection;
 
     double A = ray.D.length_2();
     double B = 2*(ray.D.dot(ray.O - position));
@@ -69,8 +70,8 @@ Hit Sphere::intersect(const Ray &ray)
     else if(delta == 0){
         //1 intersection
         double solution = -B/(2*A);
-        Point inters = (ray.D * solution) + ray.O;
-        double distance = (ray.O-inters).length();
+        intersection = (ray.D * solution) + ray.O;
+        double distance = (ray.O-intersection).length();
         t = distance;
     }
     else{
@@ -82,6 +83,7 @@ Hit Sphere::intersect(const Ray &ray)
         double distance1 = (ray.O-inters1).length();
         double distance2 = (ray.O-inters2).length();
         t = (distance1 < distance2) ? distance1 : distance2;
+        intersection = (distance1 < distance2) ? inters1 : inters2;
     }
 
 
@@ -96,11 +98,10 @@ Hit Sphere::intersect(const Ray &ray)
     * Given: t, C, r
     * Sought: N
     *
-    * Insert calculation of the sphere's normal at the intersection point.
+    * Insert calculation of the sphere's normal at the inters
     ****************************************************/
 
 
-    //Vector N /* = ... */;
-
+    Vector N = Vector(intersection - position);
     return Hit(t,N);
 }
