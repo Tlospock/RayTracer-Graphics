@@ -71,7 +71,7 @@ Hit Sphere::intersect(const Ray &ray)
         double solution = -B/(2*A);
         Point inters = (ray.D * solution) + ray.O;
         double distance = (ray.O-inters).length();
-        t = Hit(distance, N);
+        t = distance;
     }
     else{
         //2 intersections
@@ -81,7 +81,7 @@ Hit Sphere::intersect(const Ray &ray)
         Point inters2 = (ray.D * solution2) + ray.O;
         double distance1 = (ray.O-inters1).length();
         double distance2 = (ray.O-inters2).length();
-        t = (distance1 < distance2) ? Hit(distance1, N) : Hit(distance2, N);
+        t = (distance1 < distance2) ? distance1 : distance2;
     }
 
 
