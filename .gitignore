@@ -1,3 +1,8 @@
 #codeblocks files
 .depend
 .layout
+*.depend
+*.layout
+*.layout
+*.layout
+GraphicsRayTracer.layout
