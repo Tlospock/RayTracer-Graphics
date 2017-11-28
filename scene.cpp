@@ -136,9 +136,9 @@ Color Scene::zBufferImage(Hit min_hit)
 Color Scene::normaleBufferImage(Vector N)
 {
 
-    float redValue = N.x;
-    float greenValue = N.y;
-    float blueValue = N.z;
+    float redValue = (N.x+1)/2;
+    float greenValue = (N.y+1)/2;
+    float blueValue = (N.z+1)/2;
 
     Color I = Color(redValue, greenValue, blueValue);
 
