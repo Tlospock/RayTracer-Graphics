@@ -2,6 +2,7 @@
 #  scene02
 
 Eye: [200,200,1000]  
+renderMode: 2
 
 Lights:
 - position: [-1000,600,500]

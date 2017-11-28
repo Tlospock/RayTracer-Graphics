@@ -58,6 +58,27 @@ Color Scene::trace(const Ray &ray)
     *        Color*Color        dito
     *        pow(a,b)           a to the power of b
     ****************************************************/
+
+    if(renderMode == 0) /** If we do illumination */
+    {
+        return illumination(material, hit, N, V);
+    }
+    else if(renderMode == 1) /** z-buffer image */
+    {
+        return zBufferImage(min_hit);
+    }
+    else if(renderMode == 2) /** Normal buffer image */
+    {
+        return normaleBufferImage(N);
+    }
+    else
+    {
+        return material->color;
+    }
+}
+
+Color Scene::illumination(Material *material, Point hit, Vector N, Vector V)
+{
     Color I = Color(0, 0, 0);
 
     for(unsigned int i=0; i<lights.size(); ++i)
@@ -101,7 +122,25 @@ Color Scene::trace(const Ray &ray)
 
     }
 
-    //Color color = material->color;                  // place holder
+    return I;
+}
+
+Color Scene::zBufferImage(Hit min_hit)
+{
+    float grayValue = 1 - ((min_hit.t - frontDistance) / (farDistance - frontDistance));
+    Color I = Color(grayValue, grayValue, grayValue);
+
+    return I;
+}
+
+Color Scene::normaleBufferImage(Vector N)
+{
+
+    float redValue = N.x;
+    float greenValue = N.y;
+    float blueValue = N.z;
+
+    Color I = Color(redValue, greenValue, blueValue);
 
     return I;
 }
@@ -134,4 +173,24 @@ void Scene::addLight(Light *l)
 void Scene::setEye(Triple e)
 {
     eye = e;
+}
+
+int Scene::getRenderMode()
+{
+    return renderMode;
+}
+
+void Scene::setRenderMode(int renderModeTemp)
+{
+    renderMode = renderModeTemp;
+}
+
+void Scene::setfarDistance(int farDistanceTemp)
+{
+    farDistance = farDistanceTemp;
+}
+
+int Scene::getFarDistance()
+{
+    return farDistance;
 }

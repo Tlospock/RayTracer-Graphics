@@ -9,9 +9,9 @@
 //    Maarten Everts
 //    Jasper van de Gronde
 //
-//  This framework is inspired by and uses code of the raytracer framework of 
+//  This framework is inspired by and uses code of the raytracer framework of
 //  Bert Freudenberg that can be found at
-//  http://isgwww.cs.uni-magdeburg.de/graphik/lehre/cg2/projekt/rtprojekt.html 
+//  http://isgwww.cs.uni-magdeburg.de/graphik/lehre/cg2/projekt/rtprojekt.html
 //
 
 #ifndef SCENE_H_KNBLQLP6
@@ -29,12 +29,25 @@ private:
     std::vector<Object*> objects;
     std::vector<Light*> lights;
     Triple eye;
+    int renderMode; //0 for illumination, 1 for zBuffering, 2 for normal
+    float farDistance = 500;
+    float frontDistance = 50;
 public:
     Color trace(const Ray &ray);
     void render(Image &img);
     void addObject(Object *o);
     void addLight(Light *l);
     void setEye(Triple e);
+
+    void setRenderMode(int renderModeTemp);
+    int getRenderMode();
+
+    void setfarDistance(int farDistanceTemp);
+    int getFarDistance();
+
+    Color illumination(Material *material, Point hit, Vector N, Vector V);
+    Color zBufferImage(Hit min_hit);
+    Color normaleBufferImage(Vector N);
     unsigned int getNumObjects() { return objects.size(); }
     unsigned int getNumLights() { return lights.size(); }
 };
