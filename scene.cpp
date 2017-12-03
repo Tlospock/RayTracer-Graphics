@@ -17,7 +17,7 @@
 #include "scene.h"
 #include "material.h"
 
-Color Scene::trace(const Ray &ray)
+Color Scene::trace(const Ray &ray) //
 {
     // Find hit object and distance
     Hit min_hit(std::numeric_limits<double>::infinity(),Vector());
