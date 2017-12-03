@@ -28,6 +28,7 @@ Hit Triangle::intersect(const Ray &ray)
     perpendicular = edge3.cross(intersection-point3);
     if(perpendicular.dot(normal)<0) return Hit::NO_HIT();
 
+    //cout << "CEST BON !!" << endl;
     t = (ray.O-intersection).length();
 	return Hit(t, normal);
 }

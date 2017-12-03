@@ -29,6 +29,16 @@ Objects:
     kd: 0.7
     ks: 0.5
     n: 64
+- type: plane
+  point1: [210,270,300]
+  point2: [290,170,150]
+  point3: [90,320,100]
+  material: # blue
+    color: [0.0,0.0,1.0]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
 - type: sphere
   position: [210,270,300]
   radius: 50
