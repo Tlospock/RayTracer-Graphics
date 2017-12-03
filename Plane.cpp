@@ -24,8 +24,10 @@ Hit Plane::intersect(const Ray &ray)
 			/*When the ray doesn't hit the plan*/
 			return Hit::NO_HIT();
 	}
-	t = n.dot(p1 - ray.O) / n.dot(ray.D);
+	double d= -p1.x*n.x-p1.y*n.y-p1.z*n.z;
+	double sol = -(n.dot(ray.O)+d)/n.dot(ray.D);
+	intersection = ray.O + (ray.D*sol);
+
+	t = (ray.O-intersection).length();
 	return Hit(t, n);
-
-
 }
