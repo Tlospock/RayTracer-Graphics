@@ -78,6 +78,14 @@ Object* Raytracer::parseObject(const YAML::Node& node)
 		Plane *plane = new Plane(p1, p2, p3);
 		returnObject = plane;
 	}
+	if (objectType == "triangle") {
+		Point p1, p2, p3;
+		node["point1"] >> p1;
+		node["point2"] >> p2;
+		node["point3"] >> p3;
+		Plane *plane = new Plane(p1, p2, p3);
+		returnObject = plane;
+	}
 
     if (returnObject) {
         // read the material and attach to object
