@@ -13,7 +13,7 @@
 #  it should be clear that the #-character can be used to insert comments.
 
 Eye: [200,200,1000]  
-renderMode: 2
+renderMode: 1
 
 Lights:
 - position: [-200,600,1500]

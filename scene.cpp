@@ -127,9 +127,15 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V)
 
 Color Scene::zBufferImage(Hit min_hit)
 {
-    float grayValue = 1 - ((min_hit.t - frontDistance) / (farDistance - frontDistance));
-    Color I = Color(grayValue, grayValue, grayValue);
+    Color I = Color(0, 0, 0);
+    if(min_hit.t < farDistance && min_hit.t > frontDistance)
+    {
+        float grayValue = 1 - ((min_hit.t - frontDistance) / (farDistance - frontDistance));
+        I = Color(grayValue, grayValue, grayValue);
 
+    }
+    /* float grayValue = 1 - ((min_hit.t - frontDistance) / (farDistance - frontDistance));
+    I = Color(grayValue, grayValue, grayValue); */
     return I;
 }
 
