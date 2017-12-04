@@ -101,16 +101,18 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V)
         Color materialColor = material->color;
 
         /** Shadow calculation */
-        Hit objectHit(std::numeric_limits<double>::infinity(), Vector());
+        Hit lightHit(std::numeric_limits<double>::infinity(), Vector());
+        lightHit = Hit(std::numeric_limits<double>::infinity(), Vector());
+
         Object *obj = NULL;
 
-        Ray shadowRay = Ray(hit, L);
+        Ray shadowRay(hit, L);
 
         for (unsigned int j = 0; j<objects.size(); ++j){
             Hit collisionHit(objects[j]->intersect(shadowRay));
 
-            if (collisionHit.t<objectHit.t){
-                objectHit = collisionHit;
+            if (collisionHit.t<lightHit.t){
+                lightHit = collisionHit;
                 obj = objects[j];
             }
         }
