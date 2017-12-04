@@ -11,6 +11,7 @@ bin\debug\GraphicsRayTracer.exe scene01-zbuffer.yaml scene01-zbuffer.png
 bin\debug\GraphicsRayTracer.exe scene01-normal.yaml scene01-normal.png
 bin\debug\GraphicsRayTracer.exe scene01-plane.yaml scene01-plane.png
 bin\debug\GraphicsRayTracer.exe scene01-triangle.yaml scene01-triangle.png
+bin\debug\GraphicsRayTracer.exe scene01-shadow.yaml scene01-shadow.png
 
 REM Open the output file
 output.png
