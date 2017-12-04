@@ -14,6 +14,7 @@
 
 Eye: [200,200,1000]  
 renderMode: 0
+shadow: false
 
 Lights:
 - position: [-200,600,1500]

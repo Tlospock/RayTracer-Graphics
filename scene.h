@@ -30,14 +30,16 @@ private:
     std::vector<Light*> lights;
     Triple eye;
     int renderMode; //0 for illumination, 1 for zBuffering, 2 for normal
-    float farDistance = 1000;
+    float farDistance = 3000;
     float frontDistance = 500;
+    bool shadow = false;
 public:
     Color trace(const Ray &ray);
     void render(Image &img);
     void addObject(Object *o);
     void addLight(Light *l);
     void setEye(Triple e);
+    void setShadow(bool shadow_);
 
     void setRenderMode(int renderModeTemp);
     int getRenderMode();

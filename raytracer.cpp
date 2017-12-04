@@ -128,6 +128,7 @@ bool Raytracer::readScene(const std::string& inputFilename)
 
             // Read scene configuration options
             scene->setEye(parseTriple(doc["Eye"]));
+            scene->setShadow(doc["shadow"]);
 
             /** Read scene mode (0 for illumination, 1 for Zbuffer image, 2 for normal bufferImage */
             if(doc.FindValue("renderMode"))

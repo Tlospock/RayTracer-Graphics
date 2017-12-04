@@ -17,7 +17,7 @@
 #include "scene.h"
 #include "material.h"
 
-Color Scene::trace(const Ray &ray) //
+Color Scene::trace(const Ray &ray)
 {
     // Find hit object and distance
     Hit min_hit(std::numeric_limits<double>::infinity(),Vector());
@@ -221,6 +221,10 @@ void Scene::addLight(Light *l)
 void Scene::setEye(Triple e)
 {
     eye = e;
+}
+
+void Scene::setShadow(bool shadow_){
+    shadow = shadow_;
 }
 
 int Scene::getRenderMode()

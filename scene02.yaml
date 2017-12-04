@@ -3,6 +3,7 @@
 
 Eye: [200,200,1000]  
 renderMode: 2
+shadow: false
 
 Lights:
 - position: [-1000,600,500]
