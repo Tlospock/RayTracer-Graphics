@@ -77,6 +77,7 @@ Color Scene::trace(const Ray &ray) //
     }
 }
 
+/** Phong */
 Color Scene::illumination(Material *material, Point hit, Vector N, Vector V)
 {
     Color I = Color(0, 0, 0);
@@ -100,25 +101,66 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V)
         Color materialColor = material->color;
 
         /**
-         *  Phong diffuse Kd * I (L . N), with teta the angle between L & N(diffuse reflection), and phi the angle between R & V(perceived brightness)
-         * I ~= cos teta = L . N for normalized L, N
-         *
-         */
-        Color iDiffuse = max(0.0, L.dot(N)) * materialColor;
+        Hit min_hit(std::numeric_limits<double>::infinity(),Vector());
+        Object *obj = NULL;
+        for (unsigned int i = 0; i < objects.size(); ++i) {
+            Hit hit(objects[i]->intersect(ray));
+            if (hit.t<min_hit.t) {
+                min_hit = hit;
+                obj = objects[i];
+            }
+        }
+        */
 
-        /**
-         *  Phong ambient Ka * I
-         *  https://www.tomdalling.com/blog/modern-opengl/07-more-lighting-ambient-specular-attenuation-gamma/
-         */
-         Color iAmbient = lightColor * materialColor;
+        /** Shadow calculation */
+        Ray shadowRay = Ray(hit, L);
 
-        /**
-         *  Phong specular Ks * I (R . V)^n
-         */
-        Color iSpecular = pow(max(0.0, V.dot(reflectionVector)), material->n) * lightColor;
+        Object *collide = NULL;
+        Hit collision(std::numeric_limits<double>::infinity(), Vector());
 
-        /** Phong illumination */
-        I += material->kd * iDiffuse + material->ka * iAmbient + material->ks * iSpecular;
+        Point
+
+        bool shadow=false;
+        for (unsigned int j = 0; j<objects.size(); ++j){
+            Hit collisionHit(objects[j]->intersect(shadowRay));
+
+            if (collisionHit.t<collision.t){
+                collision = collisionHit;
+                collide = objects[j];
+                //break;
+            }
+        }
+
+        if(!collide)
+         {
+             //cout << "Test shadow!" << endl;
+             /**
+             *  Phong ambient Ka * I
+             *  https://www.tomdalling.com/blog/modern-opengl/07-more-lighting-ambient-specular-attenuation-gamma/
+             */
+             Color iAmbient = lightColor * materialColor;
+
+             /**
+             *  Phong diffuse Kd * I (L . N), with teta the angle between L & N(diffuse reflection), and phi the angle between R & V(perceived brightness)
+             * I ~= cos teta = L . N for normalized L, N
+             *
+             */
+            Color iDiffuse = max(0.0, L.dot(N)) * materialColor;
+
+            /**
+             *  Phong specular Ks * I (R . V)^n
+             */
+            Color iSpecular = pow(max(0.0, V.dot(reflectionVector)), material->n) * lightColor;
+
+            /** Phong illumination */
+            I += material->kd * iDiffuse + material->ka * iAmbient + material->ks * iSpecular;
+         }
+         else
+         {
+            I += lightColor * materialColor * material->ka;
+         }
+
+
 
     }
 
