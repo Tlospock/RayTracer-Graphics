@@ -106,11 +106,14 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V)
         Object *obj = NULL;
 
         Ray shadowRay = Ray(hit, L);
+        Point test = shadowRay.at(pow(2.0, -32.0));
+        shadowRay = Ray(test, L);
+
 
         for (unsigned int j = 0; j<objects.size(); ++j){
             Hit collisionHit(objects[j]->intersect(shadowRay));
 
-            if (collisionHit.t<lightHit.t && collisionHit.t > 0){
+            if (collisionHit.t<lightHit.t && collisionHit.t > 0.000001){
                 lightHit = collisionHit;
                 obj = objects[j];
             }
