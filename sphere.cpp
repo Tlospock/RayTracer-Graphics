@@ -72,7 +72,7 @@ Hit Sphere::intersect(const Ray &ray)
         double solution = -B/(2*A);
         intersection = (ray.D * solution) + ray.O;
         double distance = (ray.O-intersection).length();
-        t = distance;
+        t = solution;
     }
     else{
         //2 intersections
@@ -82,8 +82,15 @@ Hit Sphere::intersect(const Ray &ray)
         Point inters2 = (ray.D * solution2) + ray.O;
         double distance1 = (ray.O-inters1).length();
         double distance2 = (ray.O-inters2).length();
-        t = (distance1 < distance2) ? distance1 : distance2;
-        intersection = (distance1 < distance2) ? inters1 : inters2;
+        t = (solution1 < solution2 && solution2 >= 0) ? solution1 : solution2;
+
+        /** if(distance1 >=0)
+        {
+            t = (distance1 < distance2) ? distance1 : distance2;
+        } */
+
+        // intersection = (distance1 < distance2) ? inters1 : inters2;
+        intersection = (t == solution1) ? inters1 : inters2;
     }
 
 
@@ -91,7 +98,14 @@ Hit Sphere::intersect(const Ray &ray)
     if (OC.dot(ray.D) < 0.999) {
         return Hit::NO_HIT();
     }
+
     double t = 1000;*/
+
+    if(t <= 0)
+    {
+        return Hit::NO_HIT();
+    }
+
     /****************************************************
     * RT1.2: NORMAL CALCULATION
     *
