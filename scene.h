@@ -47,7 +47,7 @@ public:
     void setfarDistance(int farDistanceTemp);
     int getFarDistance();
 
-    Color illumination(Material *material, Point hit, Vector N, Vector V);
+    Color illumination(Material *material, Point hit, Vector N, Vector V, Ray ray);
     Color zBufferImage(Hit min_hit);
     Color normaleBufferImage(Vector N);
     unsigned int getNumObjects() { return objects.size(); }

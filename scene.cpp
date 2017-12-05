@@ -61,7 +61,7 @@ Color Scene::trace(const Ray &ray)
 
     if(renderMode == 0) /** If we do illumination */
     {
-        return illumination(material, hit, N, V);
+        return illumination(material, hit, N, V, ray);
     }
     else if(renderMode == 1) /** z-buffer image */
     {
@@ -78,7 +78,7 @@ Color Scene::trace(const Ray &ray)
 }
 
 /** Phong */
-Color Scene::illumination(Material *material, Point hit, Vector N, Vector V)
+Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray ray)
 {
     Color I = Color(0, 0, 0);
 
@@ -119,7 +119,8 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V)
             }
         }
 
-        if(!obj)
+        // Point shadowPoint = ray.at(collisionHit.t);
+        if(!obj || (hit - lights[i]->position).length() <= (hit - ray.at(lightHit.t)).length())
         {
          //cout << "Test shadow!" << endl;
          /**
@@ -145,7 +146,7 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V)
         }
         else
         {
-            I += lightColor * materialColor * material->ka;
+            I += materialColor * material->ka;
         }
     }
 
