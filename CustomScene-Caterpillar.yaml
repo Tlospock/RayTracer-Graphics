@@ -1,0 +1,347 @@
+---
+#  This is an example scene description for the raytracer framework created 
+#  for the Computer Science course "Introduction to Computer Graphics"
+#  taught at the University of Groningen by Tobias Isenberg.
+#
+#  The scene description format we use is based on YAML, which is a human friendly 
+#  data serialization standard. This gives us a flexible format which should be
+#  fairly easy to make both backward and forward compatible (i.e., by ignoring
+#  unknown directives). In addition parsers are available for many languages.
+#  See http://www.yaml.org/ for more information on YAML.
+#
+#  The example scene description should largely speak for itself. By now
+#  it should be clear that the #-character can be used to insert comments.
+
+Eye: [300,300,1000]
+renderMode: 0
+shadow: true
+MaxRecursionDepth: 2
+
+Lights:
+- position: [-200,600,1500]
+  color: [1.0,1.0,1.0]
+#- position: [600,600,1500]
+#  color: [0.8,0.8,0.4]
+
+Objects:
+#grape
+- type: sphere
+  position: [150, 200, 100]
+  radius: 30
+  material:
+    color: [0.4,0.0,0.6]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [180, 190, 120]
+  radius: 30
+  material:
+    color: [0.5,0.0,0.7]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [120, 230, 110]
+  radius: 30
+  material:
+    color: [0.5,0.0,0.65]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [115, 200, 120]
+  radius: 30
+  material:
+    color: [0.55,0.0,0.6]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [115, 170, 140]
+  radius: 20
+  material:
+    color: [0.55,0.0,0.6]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [140, 165, 150]
+  radius: 20
+  material:
+    color: [0.55,0.0,0.6]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [140, 130, 150]
+  radius: 20
+  material:
+    color: [0.6,0.0,0.7]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [180, 150, 120]
+  radius: 25
+  material:
+    color: [0.55,0.0,0.6]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [130, 120, 90]
+  radius: 30
+  material:
+    color: [0.4,0.0,0.5]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [170, 115, 90]
+  radius: 30
+  material:
+    color: [0.5,0.0,0.6]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [150, 80, 100]
+  radius: 22
+  material:
+    color: [0.55,0.0,0.65]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [150, 150, 110]
+  radius: 30
+  material:
+    color: [0.55,0.0,0.6]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [190, 170, 90]
+  radius: 35
+  material:
+    color: [0.55,0.0,0.6]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [160, 235, 125]
+  radius: 30
+  material:
+    color: [0.55,0.0,0.7]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [175, 250, 70]
+  radius: 32
+  material:
+    color: [0.4,0.0,0.65]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [175, 240, 90]
+  radius: 32
+  material:
+    color: [0.4,0.0,0.65]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [230, 235, 80]
+  radius: 30
+  material:
+    color: [0.45,0.0,0.65]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [225, 205, 70]
+  radius: 25
+  material:
+    color: [0.45,0.0,0.65]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [200, 225, 110]
+  radius: 28
+  material:
+    color: [0.5,0.0,0.65]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [130, 250, 90]
+  radius: 30
+  material:
+    color: [0.4,0.0,0.6]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+#feuille
+- type: triangle
+  point1: [175,265,90]
+  point2: [175,310,90]
+  point3: [220,310,80]
+  material:
+    color: [0.0,0.7,0.2]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: triangle
+  point1: [175,285,90]
+  point2: [175,350,90]
+  point3: [220,350,80]
+  material:
+    color: [0.0,0.7,0.2]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: triangle
+  point1: [175,290,90]
+  point2: [175,325,90]
+  point3: [140,335,80]
+  material:
+    color: [0.0,0.7,0.2]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+#caterpillar
+- type: sphere
+  position: [230, 260, 80]
+  radius: 10
+  material:
+    color: [0.0,0.6,0.1]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [230, 265, 80]
+  radius: 10
+  material:
+    color: [0.0,0.6,0.1]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [230, 270, 80]
+  radius: 10
+  material:
+    color: [0.0,0.6,0.1]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [230, 275, 80]
+  radius: 10
+  material:
+    color: [0.0,0.6,0.1]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [230, 280, 80]
+  radius: 10
+  material:
+    color: [0.0,0.6,0.1]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [230, 285, 80]
+  radius: 10
+  material:
+    color: [0.0,0.6,0.1]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [230, 290, 80]
+  radius: 10
+  material:
+    color: [0.0,0.6,0.1]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [231, 292, 82]
+  radius: 10
+  material:
+    color: [0.0,0.6,0.1]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [232, 295, 85]
+  radius: 10
+  material:
+    color: [0.0,0.6,0.1]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [233, 295, 90]
+  radius: 10
+  material:
+    color: [0.0,0.6,0.1]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [229, 298, 97]
+  radius: 3
+  material:
+    color: [0.9,0.9,0.9]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
+- type: sphere
+  position: [237, 298, 97]
+  radius: 3
+  material:
+    color: [0.9,0.9,0.9]
+    ka: 0.2
+    kd: 0.7
+    ks: 0.5
+    n: 64
