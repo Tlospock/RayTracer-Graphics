@@ -83,6 +83,7 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray
 {
     Color I = Color(0, 0, 0);
 	Color reflectionColor = Color(0, 0, 0);
+	Vector reflectionColorVector = ray.D - 2*(ray.D.dot(N))*N;
 
     for(unsigned int i=0; i<lights.size(); ++i)
     {
@@ -121,6 +122,7 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray
             }
         }
 
+        /** Reflection */
 		if (depth < maxRecursionDepth) {
 			reflectionColor = trace(Ray(hit, reflectionVector), depth + 1);
 		}
@@ -154,8 +156,13 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray
         {
             I += lightColor * materialColor * material->ka;
         }
-		
+
     }
+    /** Reflection */
+    if (depth < maxRecursionDepth) {
+        reflectionColor = trace(Ray(hit, reflectionColorVector), depth + 1);
+    }
+
 	I = I + reflectionColor*material->ks;
     return I;
 }
