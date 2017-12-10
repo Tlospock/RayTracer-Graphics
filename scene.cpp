@@ -146,7 +146,7 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray
         }
         else
         {
-            I += materialColor * material->ka;
+            I += lightColor * materialColor * material->ka;
         }
     }
 
