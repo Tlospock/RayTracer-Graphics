@@ -16,8 +16,9 @@
 
 #include "scene.h"
 #include "material.h"
+#include <algorithm>
 
-Color Scene::trace(const Ray &ray)
+Color Scene::trace(const Ray &ray, const int &depth)
 {
     // Find hit object and distance
     Hit min_hit(std::numeric_limits<double>::infinity(),Vector());
@@ -61,7 +62,7 @@ Color Scene::trace(const Ray &ray)
 
     if(renderMode == 0) /** If we do illumination */
     {
-        return illumination(material, hit, N, V, ray);
+        return illumination(material, hit, N, V, ray, depth);
     }
     else if(renderMode == 1) /** z-buffer image */
     {
@@ -78,9 +79,10 @@ Color Scene::trace(const Ray &ray)
 }
 
 /** Phong */
-Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray ray)
+Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray ray, const int &depth)
 {
     Color I = Color(0, 0, 0);
+	Color reflectionColor = Color(0, 0, 0);
 
     for(unsigned int i=0; i<lights.size(); ++i)
     {
@@ -119,8 +121,12 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray
             }
         }
 
+		if (depth < maxRecursionDepth) {
+			reflectionColor = trace(Ray(hit, reflectionVector), depth + 1);
+		}
+
         // Point shadowPoint = ray.at(collisionHit.t);
-        if(!obj || (hit - lights[i]->position).length() <= (hit - ray.at(lightHit.t)).length())
+        if(!shadow || !obj || (hit - lights[i]->position).length() <= (hit - ray.at(lightHit.t)).length())
         {
          //cout << "Test shadow!" << endl;
          /**
@@ -148,8 +154,9 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray
         {
             I += lightColor * materialColor * material->ka;
         }
+		
     }
-
+	I = I + reflectionColor*material->ks;
     return I;
 }
 
@@ -187,7 +194,7 @@ void Scene::render(Image &img)
         for (int x = 0; x < w; x++) {
             Point pixel(x+0.5, h-1-y+0.5, 0);
             Ray ray(eye, (pixel-eye).normalized());
-            Color col = trace(ray);
+            Color col = trace(ray,0);
             col.clamp();
             img(x,y) = col;
         }
@@ -211,6 +218,10 @@ void Scene::setEye(Triple e)
 
 void Scene::setShadow(bool shadow_){
     shadow = shadow_;
+}
+
+void Scene::setMaxRecursionDepth(int maxRecursDepth) {
+	maxRecursionDepth = maxRecursDepth;
 }
 
 int Scene::getRenderMode()

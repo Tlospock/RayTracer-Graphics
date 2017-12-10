@@ -33,13 +33,15 @@ private:
     float farDistance = 3000;
     float frontDistance = 500;
     bool shadow = false;
+	int maxRecursionDepth = 0;
 public:
-    Color trace(const Ray &ray);
+    Color trace(const Ray &ray, const int &depth);
     void render(Image &img);
     void addObject(Object *o);
     void addLight(Light *l);
     void setEye(Triple e);
     void setShadow(bool shadow_);
+	void setMaxRecursionDepth(int maxRecursDepth);
 
     void setRenderMode(int renderModeTemp);
     int getRenderMode();
@@ -47,7 +49,7 @@ public:
     void setfarDistance(int farDistanceTemp);
     int getFarDistance();
 
-    Color illumination(Material *material, Point hit, Vector N, Vector V, Ray ray);
+    Color illumination(Material *material, Point hit, Vector N, Vector V, Ray ray, const int &depth);
     Color zBufferImage(Hit min_hit);
     Color normaleBufferImage(Vector N);
     unsigned int getNumObjects() { return objects.size(); }
