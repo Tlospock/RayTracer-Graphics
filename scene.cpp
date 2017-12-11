@@ -123,9 +123,9 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray
         }
 
         /** Reflection */
-		if (depth < maxRecursionDepth) {
-			reflectionColor = trace(Ray(hit, reflectionVector), depth + 1);
-		}
+		/*if (depth < maxRecursionDepth) {
+			reflectionColor = trace(Ray(hit, reflectionColorVector), depth + 1);
+		}*/
 
         // Point shadowPoint = ray.at(collisionHit.t);
         if(!shadow || !obj || (hit - lights[i]->position).length() <= (hit - ray.at(lightHit.t)).length())
