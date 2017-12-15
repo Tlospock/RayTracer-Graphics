@@ -16,6 +16,8 @@ Eye: [300,300,1000]
 renderMode: 0
 shadow: true
 MaxRecursionDepth: 2
+SuperSampling:
+ factor: 4
 
 Lights:
 - position: [-200,600,1500]
