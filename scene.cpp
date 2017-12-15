@@ -150,11 +150,11 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray
         Color iSpecular = pow(max(0.0, V.dot(reflectionVector)), material->n) * lightColor;
 
         /** Phong illumination */
-        I = material->kd * iDiffuse + material->ka * iAmbient + material->ks * iSpecular;
+        I += material->kd * iDiffuse + material->ka * iAmbient + material->ks * iSpecular;
         }
         else
         {
-            I = lightColor * materialColor * material->ka;
+            I += lightColor * materialColor * material->ka;
         }
     }
     /** Reflection */
