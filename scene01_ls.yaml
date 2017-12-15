@@ -15,7 +15,7 @@
 Eye: [200,200,1000]  
 rendermode: 0
 shadow: true
-MaxRecursionDepth: 0
+MaxRecursionDepth: 2
 
 
 Lights:

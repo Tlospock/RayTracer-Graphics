@@ -116,7 +116,7 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray
         for (unsigned int j = 0; j<objects.size(); ++j){
             Hit collisionHit(objects[j]->intersect(shadowRay));
 
-            if (collisionHit.t<lightHit.t /*&& collisionHit.t > 0.000001*/){
+            if (collisionHit.t<lightHit.t){
                 lightHit = collisionHit;
                 obj = objects[j];
             }
@@ -128,9 +128,9 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray
 		}*/
 
         // Point shadowPoint = ray.at(collisionHit.t);
-        if(!shadow || !obj || (hit - lights[i]->position).length() <= (hit - ray.at(lightHit.t)).length())
+        if(shadow == 0 || !obj || (hit - lights[i]->position).length() <= (hit - ray.at(lightHit.t)).length())
         {
-         //cout << "Test shadow!" << endl;
+         //cout << "Test shadow!" << shadow << endl;
          /**
          *  Phong ambient Ka * I
          *  https://www.tomdalling.com/blog/modern-opengl/07-more-lighting-ambient-specular-attenuation-gamma/
@@ -150,19 +150,17 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray
         Color iSpecular = pow(max(0.0, V.dot(reflectionVector)), material->n) * lightColor;
 
         /** Phong illumination */
-        I += material->kd * iDiffuse + material->ka * iAmbient + material->ks * iSpecular;
+        I = material->kd * iDiffuse + material->ka * iAmbient + material->ks * iSpecular;
         }
         else
         {
-            I += lightColor * materialColor * material->ka;
+            I = lightColor * materialColor * material->ka;
         }
-
     }
     /** Reflection */
     if (depth < maxRecursionDepth) {
         reflectionColor = trace(Ray(hit, reflectionColorVector), depth + 1);
     }
-
 	I = I + reflectionColor*material->ks;
     return I;
 }
@@ -199,10 +197,18 @@ void Scene::render(Image &img)
     int h = img.height();
     for (int y = 0; y < h; y++) {
         for (int x = 0; x < w; x++) {
-            Point pixel(x+0.5, h-1-y+0.5, 0);
-            Ray ray(eye, (pixel-eye).normalized());
-            Color col = trace(ray,0);
-            col.clamp();
+			Color col(0, 0, 0);
+			for (int i = 0; i<superSamplingFactor; i++) {
+				double shiftX = 1 / (2.0*superSamplingFactor) + (double)i / superSamplingFactor;
+				for (int j = 0; j<superSamplingFactor; j++) {
+					double shiftY = 1 / (2.0*superSamplingFactor) + (double)j / superSamplingFactor;
+					Point pixel(x + shiftX, h - 1 - y + shiftY, 0);
+					Ray ray(eye, (pixel - eye).normalized());
+					col += trace(ray, 0);
+				}
+			}
+			col /= (superSamplingFactor*superSamplingFactor);
+			col.clamp();
             img(x,y) = col;
         }
     }
@@ -229,6 +235,11 @@ void Scene::setShadow(bool shadow_){
 
 void Scene::setMaxRecursionDepth(int maxRecursDepth) {
 	maxRecursionDepth = maxRecursDepth;
+}
+
+
+void Scene::setSuperSamplingFactor(int ssFactor) {
+	superSamplingFactor = ssFactor;
 }
 
 int Scene::getRenderMode()

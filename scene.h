@@ -34,6 +34,7 @@ private:
     float frontDistance = 500;
     bool shadow = false;
 	int maxRecursionDepth = 0;
+	int superSamplingFactor = 1;
 public:
     Color trace(const Ray &ray, const int &depth);
     void render(Image &img);
@@ -42,6 +43,7 @@ public:
     void setEye(Triple e);
     void setShadow(bool shadow_);
 	void setMaxRecursionDepth(int maxRecursDepth);
+	void setSuperSamplingFactor(int superSamplingFactor);
 
     void setRenderMode(int renderModeTemp);
     int getRenderMode();

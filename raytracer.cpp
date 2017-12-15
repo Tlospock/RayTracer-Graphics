@@ -128,8 +128,11 @@ bool Raytracer::readScene(const std::string& inputFilename)
 
             // Read scene configuration options
             scene->setEye(parseTriple(doc["Eye"]));
-            scene->setShadow(doc["shadow"]);
-			scene->setMaxRecursionDepth(doc["MaxRecursionDepth"]);
+			if (doc.FindValue("shadow"))
+				scene->setShadow(doc["shadow"]);
+			if (doc.FindValue("MaxRecursionDepth"))
+				scene->setMaxRecursionDepth(doc["MaxRecursionDepth"]);
+			scene->setSuperSamplingFactor(doc["SuperSampling"]["factor"]);
 
             /** Read scene mode (0 for illumination, 1 for Zbuffer image, 2 for normal bufferImage */
             if(doc.FindValue("renderMode"))
