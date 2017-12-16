@@ -22,13 +22,17 @@
 #include "light.h"
 #include "object.h"
 #include "image.h"
+#include "camera.h"
 
 class Scene
 {
 private:
     std::vector<Object*> objects;
     std::vector<Light*> lights;
+    /** Camera */
     Triple eye;
+    Camera *camera;
+
     int renderMode; //0 for illumination, 1 for zBuffering, 2 for normal
     float farDistance = 3000;
     float frontDistance = 500;
@@ -50,6 +54,9 @@ public:
 
     void setfarDistance(int farDistanceTemp);
     int getFarDistance();
+
+    void setCamera(Camera *cameraTemp);
+    Camera* getCamera();
 
     Color illumination(Material *material, Point hit, Vector N, Vector V, Ray ray, const int &depth);
     Color zBufferImage(Hit min_hit);

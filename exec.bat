@@ -1,6 +1,6 @@
 REM Batch file to launch ray tracer on specified file
 REM change the input_file value to change file
-set input_file=scene01_ls.yaml
+set input_file=scene01-camera-ss-reflect-lights-shadows.yaml
 echo input_file
 bin\debug\GraphicsRayTracer.exe %input_file% output.png
 
@@ -14,4 +14,5 @@ REM bin\debug\GraphicsRayTracer.exe scene01-triangle.yaml scene01-triangle.png
 REM bin\debug\GraphicsRayTracer.exe scene01-shadow.yaml scene01-shadow.png
 
 REM Open the output file
-output.png
+REM output.png
+pause

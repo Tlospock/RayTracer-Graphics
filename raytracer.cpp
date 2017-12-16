@@ -28,6 +28,7 @@
 // Functions to ease reading from YAML input
 void operator >> (const YAML::Node& node, Triple& t);
 Triple parseTriple(const YAML::Node& node);
+std::vector<int> parseDouble(const YAML::Node& node);
 
 void operator >> (const YAML::Node& node, Triple& t)
 {
@@ -43,6 +44,16 @@ Triple parseTriple(const YAML::Node& node)
     node[0] >> t.x;
     node[1] >> t.y;
     node[2] >> t.z;
+    cout << "pass2: " << t.x << endl;
+    return t;
+}
+
+std::vector<int> parseDouble(const YAML::Node& node)
+{
+    cout << "pass4" << endl;
+    std::vector<int> t;
+    t.push_back(node[0]);
+    t.push_back(node[1]);
     return t;
 }
 
@@ -128,6 +139,20 @@ bool Raytracer::readScene(const std::string& inputFilename)
 
             // Read scene configuration options
             scene->setEye(parseTriple(doc["Eye"]));
+
+            camera->eye = parseTriple(doc["Camera"]["eye"]);
+            camera->center = parseTriple(doc["Camera"]["center"]);
+            cout << "pass" << endl;
+            camera->up = parseTriple(doc["Camera"]["up"]);
+            cout << "pass3" << endl;
+            const YAML::Node& nodeTemp = doc["Camera"]["viewSize"];
+
+            nodeTemp[0] >> camera->width;
+            nodeTemp[1] >> camera->height;
+            cout << camera->width << endl;
+
+            scene->setCamera(camera);
+
 			if (doc.FindValue("shadow"))
 				scene->setShadow(doc["shadow"]);
 			if (doc.FindValue("MaxRecursionDepth"))
@@ -178,7 +203,8 @@ bool Raytracer::readScene(const std::string& inputFilename)
 
 void Raytracer::renderToFile(const std::string& outputFilename)
 {
-    Image img(400,400);
+    cout << scene->getCamera()->width << endl;
+    Image img(scene->getCamera()->width,scene->getCamera()->height);
     cout << "Tracing..." << endl;
     scene->render(img);
     cout << "Writing image to " << outputFilename << "..." << endl;

@@ -242,6 +242,14 @@ void Scene::setSuperSamplingFactor(int ssFactor) {
 	superSamplingFactor = ssFactor;
 }
 
+Camera* Scene::getCamera() {
+    return camera;
+}
+
+void Scene::setCamera(Camera *cameraTemp) {
+    camera = cameraTemp;
+}
+
 int Scene::getRenderMode()
 {
     return renderMode;
