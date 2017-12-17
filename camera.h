@@ -2,8 +2,7 @@
 #include "object.h"
 #include "triple.h"
 
-class Camera :
-	public Object
+class Camera
 {
 public:
 	Camera(Triple eye, Triple center, Triple up, int width, int height);
