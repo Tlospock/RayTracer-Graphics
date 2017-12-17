@@ -218,7 +218,9 @@ void Scene::render(Image &img)
                     }
 					else
                     {
-                        Point pixel(x * camera->up.y + camera->center.x - w / 2, (-y - 1.0) * camera->up.y + camera->center.y + h /2, 0);
+                        double xoffset = (1.0 - camera->up.y) * w * 0.5;
+                        double yoffset = (1.0 - camera->up.y) * h * 0.5;
+                        Point pixel(x * camera->up.y + camera->center.x - w / 2 + xoffset, (-y - 1.0) * camera->up.y + camera->center.y + h /2 - yoffset, 0);
                         Ray ray(eye, (pixel - eye).normalized());
                         col += trace(ray, 0);
                     }
