@@ -135,10 +135,13 @@ bool Raytracer::readScene(const std::string& inputFilename)
             YAML::Node doc;
             parser.GetNextDocument(doc);
 
+            cout << "pass2" << endl;
             // Read scene configuration options
             if(doc.FindValue("Eye"))
                 scene->setEye(parseTriple(doc["Eye"]));
-            else
+
+            cout << "pass3" << endl;
+            if(doc.FindValue("Camera"))
             {
                 Point eye, center;
                 Vector up;
@@ -152,7 +155,7 @@ bool Raytracer::readScene(const std::string& inputFilename)
                 Camera* c = new Camera(eye, center, up, w, h);
                 scene->setCamera(c);
             }
-
+            cout << "pass4" << endl;
 
 			//cout << scene->getCamera()->width << " " << scene->getCamera()->height << endl;
 
@@ -206,7 +209,16 @@ bool Raytracer::readScene(const std::string& inputFilename)
 
 void Raytracer::renderToFile(const std::string& outputFilename)
 {
-    Image img(scene->getCamera()->width,scene->getCamera()->height);
+    int width = 400;
+    int height = 400;
+    if(scene->getCamera())
+    {
+        width = scene->getCamera()->width;
+        height = scene->getCamera()->height;
+
+    }
+
+    Image img(width, height);
     cout << "Tracing..." << endl;
     scene->render(img);
     cout << "Writing image to " << outputFilename << "..." << endl;

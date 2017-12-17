@@ -9,3 +9,5 @@ GraphicsRayTracer.layout
 *.layout
 obj/Debug/camera.o
 *.o
+*.o
+*.o
