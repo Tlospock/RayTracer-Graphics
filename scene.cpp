@@ -198,7 +198,9 @@ void Scene::render(Image &img)
     for (int y = 0; y < h; y++) {
         for (int x = 0; x < w; x++) {
 			Color col(0, 0, 0);
-			for (int i = 0; i<superSamplingFactor; i++) {
+			//We shoot square(superSamplingFactor) rays inward the pixel.
+			for (int i = 0; i<superSamplingFactor; i++){
+				//shift from the origin of the pixel. If superSamplingFactor = 0, there's only one ray in the middle of the pixel
 				double shiftX = 1 / (2.0*superSamplingFactor) + (double)i / superSamplingFactor;
 				for (int j = 0; j<superSamplingFactor; j++) {
 					double shiftY = 1 / (2.0*superSamplingFactor) + (double)j / superSamplingFactor;
@@ -207,6 +209,7 @@ void Scene::render(Image &img)
 					col += trace(ray, 0);
 				}
 			}
+			//We calculate the average color obtained by the rays.
 			col /= (superSamplingFactor*superSamplingFactor);
 			col.clamp();
             img(x,y) = col;
