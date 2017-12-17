@@ -44,13 +44,11 @@ Triple parseTriple(const YAML::Node& node)
     node[0] >> t.x;
     node[1] >> t.y;
     node[2] >> t.z;
-    cout << "pass2: " << t.x << endl;
     return t;
 }
 
 std::vector<int> parseDouble(const YAML::Node& node)
 {
-    cout << "pass4" << endl;
     std::vector<int> t;
     t.push_back(node[0]);
     t.push_back(node[1]);
@@ -144,9 +142,7 @@ bool Raytracer::readScene(const std::string& inputFilename)
 			Vector up;
             doc["Camera"]["eye"] >> eye;
             doc["Camera"]["center"] >> center;
-            cout << "pass" << endl;
             doc["Camera"]["up"] >> up;
-            cout << "pass3" << endl;
             const YAML::Node& nodeTemp = doc["Camera"]["viewSize"];
 			int w, h;
             nodeTemp[0] >> w;
@@ -206,7 +202,6 @@ bool Raytracer::readScene(const std::string& inputFilename)
 
 void Raytracer::renderToFile(const std::string& outputFilename)
 {
-    cout << scene->getCamera()->width << endl;
     Image img(scene->getCamera()->width,scene->getCamera()->height);
     cout << "Tracing..." << endl;
     scene->render(img);

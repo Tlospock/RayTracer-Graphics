@@ -21,6 +21,7 @@
 #include "light.h"
 #include "scene.h"
 #include "yaml/yaml.h"
+#include "camera.h"
 
 class Raytracer {
 private:
