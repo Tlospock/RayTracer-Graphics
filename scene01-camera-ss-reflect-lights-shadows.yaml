@@ -17,8 +17,8 @@
 Camera:
  eye: [200,200,1000]
  center: [200,200,0]
- up: [0,0.5,0]
- viewSize: [700,400]
+ up: [0,0.75,0]
+ viewSize: [800,400]
 
 shadow: true
 MaxRecursionDepth: 2
