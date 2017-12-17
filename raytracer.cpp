@@ -136,21 +136,25 @@ bool Raytracer::readScene(const std::string& inputFilename)
             parser.GetNextDocument(doc);
 
             // Read scene configuration options
-            scene->setEye(parseTriple(doc["Eye"]));
+            if(doc.FindValue("Eye"))
+                scene->setEye(parseTriple(doc["Eye"]));
+            else
+            {
+                Point eye, center;
+                Vector up;
+                doc["Camera"]["eye"] >> eye;
+                doc["Camera"]["center"] >> center;
+                doc["Camera"]["up"] >> up;
+                const YAML::Node& nodeTemp = doc["Camera"]["viewSize"];
+                int w, h;
+                nodeTemp[0] >> w;
+                nodeTemp[1] >> h;
+                Camera* c = new Camera(eye, center, up, w, h);
+                scene->setCamera(c);
+            }
 
-			Point eye, center;
-			Vector up;
-            doc["Camera"]["eye"] >> eye;
-            doc["Camera"]["center"] >> center;
-            doc["Camera"]["up"] >> up;
-            const YAML::Node& nodeTemp = doc["Camera"]["viewSize"];
-			int w, h;
-            nodeTemp[0] >> w;
-            nodeTemp[1] >> h;
-			Camera* c = new Camera(eye, center, up, w, h);
-            scene->setCamera(c);
 
-			cout << scene->getCamera()->width << " " << scene->getCamera()->height << endl;
+			//cout << scene->getCamera()->width << " " << scene->getCamera()->height << endl;
 
 			if (doc.FindValue("shadow"))
 				scene->setShadow(doc["shadow"]);

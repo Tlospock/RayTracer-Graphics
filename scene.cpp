@@ -195,6 +195,11 @@ void Scene::render(Image &img)
 {
     int w = img.width();
     int h = img.height();
+
+    /** Following website instructions: http://web.archive.org/web/20110317151403/http://www-graphics.stanford.edu/courses/cs348b-99/viewgeom.html */
+    if(camera)
+        eye = camera->eye;
+
     for (int y = 0; y < h; y++) {
         for (int x = 0; x < w; x++) {
 			Color col(0, 0, 0);
@@ -204,9 +209,19 @@ void Scene::render(Image &img)
 				double shiftX = 1 / (2.0*superSamplingFactor) + (double)i / superSamplingFactor;
 				for (int j = 0; j<superSamplingFactor; j++) {
 					double shiftY = 1 / (2.0*superSamplingFactor) + (double)j / superSamplingFactor;
-					Point pixel(x + shiftX, h - 1 - y + shiftY, 0);
-					Ray ray(eye, (pixel - eye).normalized());
-					col += trace(ray, 0);
+
+					if(!camera)
+                    {
+                        Point pixel(x + shiftX, h - 1 - y + shiftY, 0);
+                        Ray ray(eye, (pixel - eye).normalized());
+                        col += trace(ray, 0);
+                    }
+					else
+                    {
+                        Point pixel(x * camera->up.y + camera->center.x - w / 2, (-y - 1.0) * camera->up.y + camera->center.y + h /2, 0);
+                        Ray ray(eye, (pixel - eye).normalized());
+                        col += trace(ray, 0);
+                    }
 				}
 			}
 			//We calculate the average color obtained by the rays.
