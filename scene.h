@@ -61,6 +61,7 @@ public:
     Color illumination(Material *material, Point hit, Vector N, Vector V, Ray ray, const int &depth);
     Color zBufferImage(Hit min_hit);
     Color normaleBufferImage(Vector N);
+    Color textureCoordinate(Point hit, Vector N, Vector V, Ray ray, const int &depth);
     unsigned int getNumObjects() { return objects.size(); }
     unsigned int getNumLights() { return lights.size(); }
 };

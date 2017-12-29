@@ -162,7 +162,7 @@ bool Raytracer::readScene(const std::string& inputFilename)
 				scene->setMaxRecursionDepth(doc["MaxRecursionDepth"]);
 			scene->setSuperSamplingFactor(doc["SuperSampling"]["factor"]);
 
-            /** Read scene mode (0 for illumination, 1 for Zbuffer image, 2 for normal bufferImage */
+            /** Read scene mode (0 for illumination, 1 for Zbuffer image, 2 for normal bufferImage, 3 for texture coordinate */
             if(doc.FindValue("renderMode"))
                 scene->setRenderMode(doc["renderMode"]);
 

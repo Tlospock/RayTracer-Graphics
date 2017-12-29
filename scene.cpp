@@ -72,6 +72,10 @@ Color Scene::trace(const Ray &ray, const int &depth)
     {
         return normaleBufferImage(N);
     }
+    else if(renderMode == 3)
+    {
+        return textureCoordinate(hit, N, V, ray, depth);
+    }
     else
     {
         return material->color;
@@ -187,6 +191,13 @@ Color Scene::normaleBufferImage(Vector N)
     float blueValue = (N.z+1)/2;
 
     Color I = Color(redValue, greenValue, blueValue);
+
+    return I;
+}
+
+Color Scene::textureCoordinate(Point hit, Vector N, Vector V, Ray ray, const int &depth)
+{
+    Color I = Color(0, 0, 0);
 
     return I;
 }
