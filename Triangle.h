@@ -22,9 +22,11 @@ class Triangle : public Object
         }
 
         virtual Hit intersect(const Ray &ray);
+        virtual Point localPoint(Point globalPoint);
 
 
         const Point point1, point2, point3;
+        Vector axisVector, zeroVector, sideVector;
 
 
     private:

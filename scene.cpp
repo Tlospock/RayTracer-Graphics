@@ -74,7 +74,7 @@ Color Scene::trace(const Ray &ray, const int &depth)
     }
     else if(renderMode == 3)
     {
-        return textureCoordinate(hit, N, V, ray, depth);
+        return textureCoordinate(hit, N, V, ray, depth, obj);
     }
     else
     {
@@ -195,10 +195,12 @@ Color Scene::normaleBufferImage(Vector N)
     return I;
 }
 
-Color Scene::textureCoordinate(Point hit, Vector N, Vector V, Ray ray, const int &depth)
+Color Scene::textureCoordinate(Point hit, Vector N, Vector V, Ray ray, const int &depth, Object *obj)
 {
     Color I = Color(0, 0, 0);
+    Point localSphericalPoint(obj->localPoint(hit));
 
+    I = Color(localSphericalPoint.y, localSphericalPoint.z, 0);
     return I;
 }
 

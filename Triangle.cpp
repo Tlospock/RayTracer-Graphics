@@ -32,3 +32,8 @@ Hit Triangle::intersect(const Ray &ray)
     t = (ray.O-intersection).length();
 	return Hit(t, normal);
 }
+
+Point Triangle::localPoint(Point globalPoint)
+{
+    return globalPoint;
+}

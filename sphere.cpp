@@ -119,3 +119,14 @@ Hit Sphere::intersect(const Ray &ray)
     Vector N = Vector(intersection - position);
     return Hit(t,N);
 }
+
+Point Sphere::localPoint(Point globalPoint)
+{
+    Point localCartesianSpherePoint = globalPoint - position;
+    double rho = r;
+    double phi = acos(localCartesianSpherePoint.z/rho);
+    double theta = asin(localCartesianSpherePoint.y/(rho*sin(phi)));
+
+    Point localSphericalPoint(rho, theta, phi);
+    return localCartesianSpherePoint;
+}

@@ -42,3 +42,8 @@ Hit Plane::intersect(const Ray &ray)
 	t = (ray.O-intersection).length();
 	return Hit(t, normal);
 }
+
+Point Plane::localPoint(Point globalPoint)
+{
+    return globalPoint;
+}

@@ -20,7 +20,7 @@ Camera:
  up: [0,1.0,0]
  viewSize: [400,400]
 
-renderMode: 0
+renderMode: 3
 
 shadow: true
 MaxRecursionDepth: 2
