@@ -179,6 +179,14 @@ bool Raytracer::readScene(const std::string& inputFilename)
             if(doc.FindValue("renderMode"))
                 scene->setRenderMode(doc["renderMode"]);
 
+            if(doc.FindValue("GoochParameters"))
+            {
+                scene->setB(doc["GoochParameters"]["b"]);
+                scene->setY(doc["GoochParameters"]["y"]);
+                scene->setAlpha(doc["GoochParameters"]["alpha"]);
+                scene->setBeta(doc["GoochParameters"]["beta"]);
+            }
+
             // Read and parse the scene objects
             const YAML::Node& sceneObjects = doc["Objects"];
             if (sceneObjects.GetType() != YAML::CT_SEQUENCE) {

@@ -60,7 +60,7 @@ Color Scene::trace(const Ray &ray, const int &depth)
     *        pow(a,b)           a to the power of b
     ****************************************************/
 
-    if(renderMode == 0) /** If we do illumination */
+    if(renderMode == 0) /** If we do phong illumination */
     {
         return illumination(material, hit, N, V, ray, depth, obj);
     }
@@ -72,9 +72,13 @@ Color Scene::trace(const Ray &ray, const int &depth)
     {
         return normaleBufferImage(N);
     }
-    else if(renderMode == 3)
+    else if(renderMode == 3) /** Texture coordinate (not working perfectly) */
     {
         return textureCoordinate(hit, N, V, ray, depth, obj);
+    }
+    else if(renderMode == 4) /** Gooch & al illumination */
+    {
+        return goochIllumination(material, hit, N, V, ray, depth, obj);
     }
     else
     {
@@ -207,13 +211,69 @@ Color Scene::normaleBufferImage(Vector N)
     return I;
 }
 
-/** Not working */
+/** Texture coordinate color: Not working */
 Color Scene::textureCoordinate(Point hit, Vector N, Vector V, Ray ray, const int &depth, Object *obj)
 {
     Color I = Color(0, 0, 0);
     Point localSphericalPoint(obj->localPoint(hit));
 
     I = Color(localSphericalPoint.y, 0, localSphericalPoint.z);
+    return I;
+}
+
+/** Gooch illumination */
+Color Scene::goochIllumination(Material *material, Point hit, Vector N, Vector V, Ray ray, const int & depth, Object* objectConsidered)
+{
+    Color I = Color(0, 0, 0);
+    /** I = kCool *(1 - dot(N,L))/2 + kWarm * (1 + dot(N,L))/2 (not necessary that dot(N,L)<0).
+        kCool = kBlue + alpha * kd
+        kWarm = kYellow + beta * kd
+
+        kBlue = (0, 0, b) b€[0, 1]
+        kYellow = (y, y, 0) y€[0, 1]
+
+        kd in gooch: lights[i]->color*material->color*material->kd.
+    */
+
+
+    Color kBlue(0, 0, b);
+    Color kYellow(y, y, 0);
+
+    Color reflectionColor = Color(0, 0, 0);
+	Vector reflectionColorVector = ray.D - 2*(ray.D.dot(N))*N;
+
+    for(unsigned int i=0; i<lights.size(); ++i)
+    {
+        /** Vector to light */
+        Vector L = lights[i]->position - hit;
+
+        /** Vector of reflected light */
+        Vector reflectionVector = 2*(L.dot(N))*N -L;
+        reflectionVector.normalize();
+
+        /** Normalization of light vector*/
+        L.normalize();
+
+        Color goochKd = lights[i]->color*material->color*material->kd;
+
+        Color kCool = kBlue + alpha * goochKd;
+        Color kWarm = kYellow + beta * goochKd;
+
+        /**
+         *  Phong specular Ks * I (R . V)^n
+         */
+        Color iSpecular = pow(max(0.0, V.dot(reflectionVector)), material->n) * lights[i]->color;
+
+        I += kCool *(1 - N.dot(L))/2 + kWarm * (1 + N.dot(L))/2;
+        I += material->ks * iSpecular;
+    }
+
+    /** Reflection */
+    if (depth < maxRecursionDepth) {
+        reflectionColor = trace(Ray(hit, reflectionColorVector), depth + 1);
+    }
+	I = I + reflectionColor*material->ks;
+
     return I;
 }
 
@@ -314,4 +374,44 @@ void Scene::setfarDistance(int farDistanceTemp)
 int Scene::getFarDistance()
 {
     return farDistance;
+}
+
+void Scene::setB(double bTemp)
+{
+    b = bTemp;
+}
+
+double Scene::getB()
+{
+    return b;
+}
+
+void Scene::setY(double yTemp)
+{
+    y = yTemp;
+}
+
+double Scene::getY()
+{
+    return y;
+}
+
+void Scene::setAlpha(double alphaTemp)
+{
+    alpha = alphaTemp;
+}
+
+double Scene::getAlpha()
+{
+    return alpha;
+}
+
+void Scene::setBeta(double betaTemp)
+{
+    beta = betaTemp;
+}
+
+double Scene::getBeta()
+{
+    return beta;
 }

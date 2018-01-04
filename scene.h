@@ -39,6 +39,13 @@ private:
     bool shadow = false;
 	int maxRecursionDepth = 0;
 	int superSamplingFactor = 1;
+
+	/** Gooch parameters */
+    double b;
+    double y;
+    double alpha;
+    double beta;
+
 public:
     Color trace(const Ray &ray, const int &depth);
     void render(Image &img);
@@ -58,10 +65,24 @@ public:
     void setCamera(Camera *cameraTemp);
     Camera* getCamera();
 
+    void setB(double bTemp);
+    double getB();
+
+    void setY(double yTemp);
+    double getY();
+
+    void setAlpha(double alphaTemp);
+    double getAlpha();
+
+    void setBeta(double betaTemp);
+    double getBeta();
+
     Color illumination(Material *material, Point hit, Vector N, Vector V, Ray ray, const int &depth, Object* objectConsidered);
     Color zBufferImage(Hit min_hit);
     Color normaleBufferImage(Vector N);
     Color textureCoordinate(Point hit, Vector N, Vector V, Ray ray, const int &depth, Object *obj);
+    Color goochIllumination(Material *material, Point hit, Vector N, Vector V, Ray ray, const int & depth, Object* objectConsidered);
+
     unsigned int getNumObjects() { return objects.size(); }
     unsigned int getNumLights() { return lights.size(); }
 };
