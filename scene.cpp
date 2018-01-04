@@ -62,7 +62,7 @@ Color Scene::trace(const Ray &ray, const int &depth)
 
     if(renderMode == 0) /** If we do illumination */
     {
-        return illumination(material, hit, N, V, ray, depth);
+        return illumination(material, hit, N, V, ray, depth, obj);
     }
     else if(renderMode == 1) /** z-buffer image */
     {
@@ -83,7 +83,7 @@ Color Scene::trace(const Ray &ray, const int &depth)
 }
 
 /** Phong */
-Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray ray, const int &depth)
+Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray ray, const int &depth, Object* objectConsidered)
 {
     Color I = Color(0, 0, 0);
 	Color reflectionColor = Color(0, 0, 0);
@@ -105,7 +105,10 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray
 
         /** Get light color */
         Color lightColor = lights[i]->color;
+
+        /** Get material color */
         Color materialColor = material->color;
+
 
         /** Shadow calculation */
         Hit lightHit(std::numeric_limits<double>::infinity(), Vector());
@@ -124,6 +127,15 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray
                 lightHit = collisionHit;
                 obj = objects[j];
             }
+        }
+
+        if(objectConsidered->material->texture != NULL)
+        {
+            Point localTexturePoint(0, 0, 0);
+            localTexturePoint = objectConsidered->localPoint(hit);
+            //std::cout << "imageThere " << objectConsidered->material->texture->width() << ", " << objectConsidered->material->texture->height() << std::endl;
+            materialColor = objectConsidered->material->texture->colorAt(localTexturePoint.y, localTexturePoint.z);
+            //std::cout << "endImgae" << std::endl;
         }
 
         /** Reflection */
@@ -195,12 +207,13 @@ Color Scene::normaleBufferImage(Vector N)
     return I;
 }
 
+/** Not working */
 Color Scene::textureCoordinate(Point hit, Vector N, Vector V, Ray ray, const int &depth, Object *obj)
 {
     Color I = Color(0, 0, 0);
     Point localSphericalPoint(obj->localPoint(hit));
 
-    I = Color(localSphericalPoint.y, localSphericalPoint.z, 0);
+    I = Color(localSphericalPoint.y, 0, localSphericalPoint.z);
     return I;
 }
 

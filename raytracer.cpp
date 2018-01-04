@@ -58,7 +58,20 @@ std::vector<int> parseDouble(const YAML::Node& node)
 Material* Raytracer::parseMaterial(const YAML::Node& node)
 {
     Material *m = new Material();
-    node["color"] >> m->color;
+
+    const YAML::Node* textureNode = node.FindValue("texture");
+
+    /** If texture */
+    if(textureNode)
+    {
+        std::string nodeTexture;
+        node["texture"] >> nodeTexture;
+        std::cout << "have a texture : " << nodeTexture << std::endl;
+        m->texture = new Image(nodeTexture.c_str());
+    }
+    else
+        node["color"] >> m->color;
+
     node["ka"] >> m->ka;
     node["kd"] >> m->kd;
     node["ks"] >> m->ks;

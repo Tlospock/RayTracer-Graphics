@@ -58,7 +58,7 @@ public:
     void setCamera(Camera *cameraTemp);
     Camera* getCamera();
 
-    Color illumination(Material *material, Point hit, Vector N, Vector V, Ray ray, const int &depth);
+    Color illumination(Material *material, Point hit, Vector N, Vector V, Ray ray, const int &depth, Object* objectConsidered);
     Color zBufferImage(Hit min_hit);
     Color normaleBufferImage(Vector N);
     Color textureCoordinate(Point hit, Vector N, Vector V, Ray ray, const int &depth, Object *obj);

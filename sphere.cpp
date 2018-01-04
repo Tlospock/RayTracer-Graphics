@@ -123,10 +123,15 @@ Hit Sphere::intersect(const Ray &ray)
 Point Sphere::localPoint(Point globalPoint)
 {
     Point localCartesianSpherePoint = globalPoint - position;
+
+    if(localCartesianSpherePoint.length() == 0)
+        return Color(0, 0, 0);
+
+    double m_pi = 3.14159265358979323846264338327950288419716939937510;
     double rho = r;
-    double phi = acos(localCartesianSpherePoint.z/rho);
-    double theta = asin(localCartesianSpherePoint.y/(rho*sin(phi)));
+    double phi = (acos(localCartesianSpherePoint.z/rho)) / m_pi;
+    double theta = (atan2(localCartesianSpherePoint.y, localCartesianSpherePoint.x) + m_pi) / (2*m_pi);
 
     Point localSphericalPoint(rho, theta, phi);
-    return localCartesianSpherePoint;
+    return localSphericalPoint;
 }

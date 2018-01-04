@@ -20,7 +20,7 @@ Camera:
  up: [0,1.0,0]
  viewSize: [400,400]
 
-renderMode: 3
+renderMode: 0
 
 shadow: true
 MaxRecursionDepth: 2
@@ -66,8 +66,8 @@ Objects:
   radius: 50
   angle: 90
   material:
-    color: [1.0,0.8,0.0]
-    # texture: earthmap1k.png
+    #color: [1.0,0.8,0.0]
+    texture: C:\Users\A_Tlos\Documents\Code\RayTracer-Graphics\bluegrid.png
     ka: 0.2
     kd: 0.8
     ks: 0
