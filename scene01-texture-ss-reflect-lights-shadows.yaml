@@ -67,7 +67,7 @@ Objects:
   angle: 90
   material:
     #color: [1.0,0.8,0.0]
-    texture: C:\Users\A_Tlos\Documents\Code\RayTracer-Graphics\bluegrid.png
+    texture: C:\Users\A_Tlos\Documents\Code\RayTracer-Graphics\earthmap1k.png
     ka: 0.2
     kd: 0.8
     ks: 0
