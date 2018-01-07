@@ -17,6 +17,7 @@
 #include "sphere.h"
 #include <iostream>
 #include <math.h>
+#include <vector>
 
 /************************** Sphere **********************************/
 
@@ -124,14 +125,26 @@ Point Sphere::localPoint(Point globalPoint)
 {
     Point localCartesianSpherePoint = globalPoint - position;
 
-    if(localCartesianSpherePoint.length() == 0)
-        return Color(0, 0, 0);
+	if (localCartesianSpherePoint.length() == 0)
+		return Color(0, 0, 0);
+	if (rotationAngle != 0) {
+		//Here is the vector that must become (0,0,1) with the new cartesian coordinates system
+		Vector verticalVector = (r * rotationVector).normalized();
+		Vector Zaxis(0, 0, 1);
+
+		Vector R = verticalVector.cross(Zaxis).normalized(); //Rotation axis
+		double alpha = acos(verticalVector.dot(Zaxis)); //rotation angle
+
+		//Now we calculate the new cartesian coordinates of our sphere points, with the rotation
+		localCartesianSpherePoint = cos(alpha)*localCartesianSpherePoint + (1 - cos(alpha))*localCartesianSpherePoint.dot(R)*R + sin(alpha)*R.cross(localCartesianSpherePoint);
+	}
+	
 
     double m_pi = 3.14159265358979323846264338327950288419716939937510;
     double rho = r;
     double phi = (acos(localCartesianSpherePoint.z/rho)) / m_pi;
-    double theta = (atan2(localCartesianSpherePoint.y, localCartesianSpherePoint.x)) / (2*m_pi);
-	if (theta < 0) theta += 1;
+    double theta = (atan2(localCartesianSpherePoint.y, localCartesianSpherePoint.x)-rotationAngle*m_pi/180) / (2*m_pi);
+	while (theta < 0) theta += 1;
 
     Point localSphericalPoint(rho, theta, phi);
     return localSphericalPoint;
