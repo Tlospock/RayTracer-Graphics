@@ -22,7 +22,8 @@
 class Sphere : public Object
 {
 public:
-    Sphere(Point position,double r) : position(position), r(r) {
+
+	Sphere(Point position, double r, Vector rotationVector, double angle) : position(position), r(r), rotationVector(rotationVector), rotationAngle(angle) {
 		axisVector = Vector(0, 0, r);
 		zeroVector = Vector(0, r, 0);
 		sideVector = Vector(r, 0, 0);
@@ -33,6 +34,8 @@ public:
 
     const Point position;
     const double r;
+	const Vector rotationVector;
+	const double rotationAngle;
 	Vector axisVector, zeroVector, sideVector;
 };
 

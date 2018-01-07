@@ -130,7 +130,8 @@ Point Sphere::localPoint(Point globalPoint)
     double m_pi = 3.14159265358979323846264338327950288419716939937510;
     double rho = r;
     double phi = (acos(localCartesianSpherePoint.z/rho)) / m_pi;
-    double theta = (atan2(localCartesianSpherePoint.y, localCartesianSpherePoint.x) + m_pi) / (2*m_pi);
+    double theta = (atan2(localCartesianSpherePoint.y, localCartesianSpherePoint.x)) / (2*m_pi);
+	if (theta < 0) theta += 1;
 
     Point localSphericalPoint(rho, theta, phi);
     return localSphericalPoint;

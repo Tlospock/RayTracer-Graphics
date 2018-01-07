@@ -89,9 +89,18 @@ Object* Raytracer::parseObject(const YAML::Node& node)
         Point pos;
         node["position"] >> pos;
         double r;
-        node["radius"] >> r;
-        Sphere *sphere = new Sphere(pos,r);
-        returnObject = sphere;
+		double angle = 0;
+		Vector rotationVector(0, 0, 0);
+		if (node.FindValue("angle")) {
+			node["radius"][0] >> r;
+			node["angle"] >> angle;
+			rotationVector = parseTriple(node["radius"][1]);
+		}
+		else {
+			node["radius"] >> r;
+		}
+        Sphere *sphere = new Sphere(pos,r, rotationVector, angle);
+		returnObject = sphere;
     }
 	if (objectType == "plane") {
 		Point p1, p2, p3;
