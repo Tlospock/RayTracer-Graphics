@@ -80,7 +80,7 @@ public:
     Color illumination(Material *material, Point hit, Vector N, Vector V, Ray ray, const int &depth, Object* objectConsidered);
     Color zBufferImage(Hit min_hit);
     Color normaleBufferImage(Vector N);
-    Color textureCoordinate(Point hit, Vector N, Vector V, Ray ray, const int &depth, Object *obj);
+    Color textureCoordinate(Point hit, Object *obj);
     Color goochIllumination(Material *material, Point hit, Vector N, Vector V, Ray ray, const int & depth, Object* objectConsidered);
 
     unsigned int getNumObjects() { return objects.size(); }
