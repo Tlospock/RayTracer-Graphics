@@ -24,6 +24,7 @@
 #include <ctype.h>
 #include <fstream>
 #include <assert.h>
+#include "glm.h"
 
 // Functions to ease reading from YAML input
 void operator >> (const YAML::Node& node, Triple& t);
@@ -117,6 +118,12 @@ Object* Raytracer::parseObject(const YAML::Node& node)
 		node["point3"] >> p3;
 		Triangle *triangle = new Triangle(p1, p2, p3);
 		returnObject = triangle;
+	}
+
+	if (objectType == "OBJModel") {
+        std::string path;
+        node["path"] >> path;
+        GLMmodel* model = glmReadOBJ(path);
 	}
 
     if (returnObject) {
