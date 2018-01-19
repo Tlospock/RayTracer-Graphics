@@ -2,7 +2,7 @@
 # dolphins.obj
 #
 
-mtllib dolphins.mtl
+#mtllib dolphins.mtl
 
 v 45.72071 330.25390 8.39974
 v 40.21416 331.03907 0.00044

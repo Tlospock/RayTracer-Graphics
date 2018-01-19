@@ -14,7 +14,7 @@
 /* Apparently Mac OS X puts the GLUT headers somewhere different.
    For windows we use freeglut.
  */
-//#include <GL/glut.h>
+/*#include <GL/glut.h>*/
 
 
 #ifdef __cplusplus

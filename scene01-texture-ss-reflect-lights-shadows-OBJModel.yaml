@@ -68,10 +68,10 @@ Objects:
 #    n: 32
 - type: sphere
   position: [140,220,400]
-  radius: 50
+  radius: [50,[0,1,0.7]]
   angle: 90
   material:
-    #color: [1.0,0.8,0.0]
+    color: [1.0,0.8,0.0]
     texture: C:\Users\A_Tlos\Documents\Code\RayTracer-Graphics\earthmap1k.png
     ka: 0.2
     kd: 0.8
@@ -96,9 +96,10 @@ Objects:
     ks: 0
     n: 1
 - type: OBJModel
-  path: C:\Users\A_Tlos\Documents\Code\RayTracer-Graphics\earthmap1k.png
+  path: C:\Users\A_Tlos\Documents\Code\RayTracer-Graphics\3DObject\Gift.obj
   position: [290,170,150]
-  radius: 50
+  radius: [50,[0,1,0.7]]
+  angle: 50
   material: # red
     color: [1.0,0.0,0.0]
     ka: 0.2

@@ -20,6 +20,7 @@
 
 Color Scene::trace(const Ray &ray, const int &depth)
 {
+
     // Find hit object and distance
     Hit min_hit(std::numeric_limits<double>::infinity(),Vector());
     Object *obj = NULL;
@@ -285,7 +286,7 @@ void Scene::render(Image &img)
     /** Following website instructions: http://web.archive.org/web/20110317151403/http://www-graphics.stanford.edu/courses/cs348b-99/viewgeom.html */
     if(camera)
         eye = camera->eye;
-
+    std::cout << "renderingNextEye" << std::endl;
     for (int y = 0; y < h; y++) {
         for (int x = 0; x < w; x++) {
 			Color col(0, 0, 0);

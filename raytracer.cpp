@@ -20,10 +20,12 @@
 #include "material.h"
 #include "light.h"
 #include "image.h"
+#include "scene.h"
 #include "yaml/yaml.h"
 #include <ctype.h>
 #include <fstream>
 #include <assert.h>
+#include <string.h>
 #include "glm.h"
 
 // Functions to ease reading from YAML input
@@ -65,13 +67,17 @@ Material* Raytracer::parseMaterial(const YAML::Node& node)
     /** If texture */
     if(textureNode)
     {
+        std::cout << "start a texture! " << std::endl;
         std::string nodeTexture;
         node["texture"] >> nodeTexture;
         std::cout << "have a texture : " << nodeTexture << std::endl;
         m->texture = new Image(nodeTexture.c_str());
     }
     else
+    {
         node["color"] >> m->color;
+    }
+
 
     node["ka"] >> m->ka;
     node["kd"] >> m->kd;
@@ -83,6 +89,7 @@ Material* Raytracer::parseMaterial(const YAML::Node& node)
 Object* Raytracer::parseObject(const YAML::Node& node)
 {
     Object *returnObject = NULL;
+    Triangle *vertexTriangle = NULL;
     std::string objectType;
     node["type"] >> objectType;
 
@@ -120,10 +127,48 @@ Object* Raytracer::parseObject(const YAML::Node& node)
 		returnObject = triangle;
 	}
 
+    //std::cout << "VertexIndices: " << model->triangles[k].vindices[0] << std::endl;
+    //std::cout << "translateVertex indices: " << (model->triangles[k].vindices[0]-1)*3 << std::endl;
+    //std::cout << "VertexIndices: " << model->triangles[k].vindices[0] << " " << model->triangles[k].vindices[1] << " " << model->triangles[k].vindices[2] << std::endl;
+    //std::cout << "Vertex: " << model->vertices[(model->triangles[k].vindices[0])*3] << " " << model->vertices[(model->triangles[k].vindices[0])*3 +1] << " " << model->vertices[(model->triangles[k].vindices[0])*3+2] << std::endl;
+
 	if (objectType == "OBJModel") {
+
         std::string path;
         node["path"] >> path;
-        GLMmodel* model = glmReadOBJ(path);
+        char *pathChar = new char[path.length() + 1];
+        strcpy(pathChar, path.c_str());
+
+        GLMmodel* model = glmReadOBJ(pathChar);
+        std::cout << "have a 3D model with " << model->numvertices << " vertex and " << model->numtriangles << " triangles" << std::endl;
+
+        //std::cout << "VertexIndices: " << model->triangles[k].vindices[0] << std::endl;
+            //std::cout << "translateVertex indices: " << (model->triangles[k].vindices[0]-1)*3 << std::endl;
+            //std::cout << "VertexIndices: " << model->triangles[k].vindices[0] << " " << model->triangles[k].vindices[1] << " " << model->triangles[k].vindices[2] << std::endl;
+            //std::cout << "Vertex: " << model->vertices[(model->triangles[k].vindices[0])*3] << " " << model->vertices[(model->triangles[k].vindices[0])*3 +1] << " " << model->vertices[(model->triangles[k].vindices[0])*3+2] << std::endl;
+
+        for(int k=0; k < model->numtriangles; ++k)
+        {
+
+            Point posVertex;
+            node["position"] >> posVertex;
+            Point p1(model->vertices[model->triangles[k].vindices[0]*3], model->vertices[model->triangles[k].vindices[0]*3 +1], model->vertices[model->triangles[k].vindices[0]*3 +2]);
+            Point p2(model->vertices[model->triangles[k].vindices[1]*3], model->vertices[model->triangles[k].vindices[1]*3 +1], model->vertices[model->triangles[k].vindices[1]*3 +2]);
+            Point p3(model->vertices[model->triangles[k].vindices[2]*3], model->vertices[model->triangles[k].vindices[2]*3 +1], model->vertices[model->triangles[k].vindices[2]*3 +2]);
+            p1 += posVertex;
+            p2 += posVertex;
+            p3 += posVertex;
+
+            vertexTriangle = new Triangle(p1, p2, p3);
+            vertexTriangle->material = parseMaterial(node["material"]);
+            std::cout << "material ka: " << vertexTriangle->material->ka << std::endl;
+            scene->addObject(vertexTriangle);
+
+        }
+        std::cout << "number of objects " << scene->getNumObjects() << std::endl;
+        /*Triangle *triangle = new Triangle();
+        returnObject =*/
+        delete [] pathChar;
 	}
 
     if (returnObject) {
