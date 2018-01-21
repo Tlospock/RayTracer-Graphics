@@ -17,13 +17,15 @@
 #include "scene.h"
 #include "material.h"
 #include <algorithm>
+#include <cmath>
 
 Color Scene::trace(const Ray &ray, const int &depth)
 {
     // Find hit object and distance
     Hit min_hit(std::numeric_limits<double>::infinity(),Vector());
     Object *obj = NULL;
-    for (unsigned int i = 0; i < objects.size(); ++i) {
+	#pragma omp parallel for
+    for (int i = 0; i < objects.size(); ++i) {
         Hit hit(objects[i]->intersect(ray));
         if (hit.t<min_hit.t) {
             min_hit = hit;
@@ -93,7 +95,8 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray
 	Color reflectionColor = Color(0, 0, 0);
 	Vector reflectionColorVector = ray.D - 2*(ray.D.dot(N))*N;
 
-    for(unsigned int i=0; i<lights.size(); ++i)
+	#pragma omp parallel for
+    for(int i=0; i<lights.size(); ++i)
     {
         /** Vector to light */
         Vector L = lights[i]->position - hit;
@@ -123,8 +126,8 @@ Color Scene::illumination(Material *material, Point hit, Vector N, Vector V, Ray
         //Point test = shadowRay.at(pow(2.0, -32.0));
         //shadowRay = Ray(test, L);
 
-
-        for (unsigned int j = 0; j<objects.size(); ++j){
+		#pragma omp parallel for
+        for (int j = 0; j<objects.size(); ++j){
             Hit collisionHit(objects[j]->intersect(shadowRay));
 
             if (collisionHit.t<lightHit.t){
@@ -241,8 +244,8 @@ Color Scene::goochIllumination(Material *material, Point hit, Vector N, Vector V
 
     Color reflectionColor = Color(0, 0, 0);
 	Vector reflectionColorVector = ray.D - 2*(ray.D.dot(N))*N;
-
-    for(unsigned int i=0; i<lights.size(); ++i)
+	#pragma omp parallel for
+    for(int i=0; i<lights.size(); ++i)
     {
         /** Vector to light */
         Vector L = lights[i]->position - hit;
@@ -285,13 +288,13 @@ void Scene::render(Image &img)
     /** Following website instructions: http://web.archive.org/web/20110317151403/http://www-graphics.stanford.edu/courses/cs348b-99/viewgeom.html */
     if(camera)
         eye = camera->eye;
-
+	#pragma omp parallel for
     for (int y = 0; y < h; y++) {
         for (int x = 0; x < w; x++) {
 			Color col(0, 0, 0);
 			//We shoot square(superSamplingFactor) rays inward the pixel.
 			for (int i = 0; i<superSamplingFactor; i++){
-				//shift from the origin of the pixel. If superSamplingFactor = 0, there's only one ray in the middle of the pixel
+				//shift from the origin of the pixel. If superSamplingFactor = 1, there's only one ray in the middle of the pixel
 				double shiftX = 1 / (2.0*superSamplingFactor) + (double)i / superSamplingFactor;
 				for (int j = 0; j<superSamplingFactor; j++) {
 					double shiftY = 1 / (2.0*superSamplingFactor) + (double)j / superSamplingFactor;
