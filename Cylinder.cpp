@@ -26,8 +26,8 @@ Hit Cylinder::intersect(const Ray &ray) {
 	* square(ray.D*t+ray.O - c - (d.(ray.D*t+ray.O)*d) - square(r) = 0
 	* We can solve this using delta.
 	*/
-
-
+	std::vector<tuple<Point, double, bool>> intersections; /*(intersection point, distance from light source, is on the cylinder's side ?)*/
+	double e = 0.00001;
 	Vector da = ray.D - ray.D.dot(axis)*axis; //used for less calculations
 	Vector dp = ray.O - c1; //used for less calculations
 	Vector db = dp - (dp.dot(axis)*axis); //used for less calculations
@@ -35,25 +35,30 @@ Hit Cylinder::intersect(const Ray &ray) {
 	double B = 2 * (da.dot(db));
 	double C = db.length_2()-pow(radius, 2);
 
-	//Point b = c1 - ray.O;
-	//Point pa = 
 	double delta = B * B - 4 * A*C;
-	if (delta < 0) return Hit::NO_HIT();
 
-	double sol1 = (-B - sqrt(delta)) / (2 * A);
-	double sol2 = (-B + sqrt(delta)) / (2 * A);
-
-	/*We choose intersections that are between the caps.*/
-	std::vector<tuple<Point, double, bool>> intersections; /*(intersection point, distance from light source, is on the side ?)*/
-	std::vector<double> distances;
-	Point q1 = ray.O + ray.D*sol1;
-	Point q2 = ray.O + ray.D*sol2;
-
-	if (sol1 >= 0 && axis.dot(q1 - c1) > 0 && axis.dot(q1 - c2) < 0) {
-		intersections.push_back(make_tuple(q1, sol1, true));
+	if (delta < -e) return Hit::NO_HIT();
+	else if (delta < e) {
+		double sol = -B / (2 * A);
+		Point q = ray.O + ray.D*sol;
+		if (sol >= 0 && axis.dot(q - c1) > 0 && axis.dot(q - c2) < 0) {
+			intersections.push_back(make_tuple(q, sol, true));
+		}
 	}
-	if (sol2 >= 0 && axis.dot(q2 - c1) > 0 && axis.dot(q2 - c2) < 0) {
-		intersections.push_back(make_tuple(q2, sol2, true));
+	else {
+		double sol1 = (-B - sqrt(delta)) / (2 * A);
+		double sol2 = (-B + sqrt(delta)) / (2 * A);
+
+		/*We choose intersections that are between the caps.*/
+		Point q1 = ray.O + ray.D*sol1;
+		Point q2 = ray.O + ray.D*sol2;
+
+		if (sol1 >= e && axis.dot(q1 - c1) > 0 && axis.dot(q1 - c2) < 0) {
+			intersections.push_back(make_tuple(q1, sol1, true));
+		}
+		if (sol2 >= e && axis.dot(q2 - c1) > 0 && axis.dot(q2 - c2) < 0) {
+			intersections.push_back(make_tuple(q2, sol2, true));
+		}
 	}
 
 	/*No we look for intersections with the bottom and top planes
@@ -73,11 +78,11 @@ Hit Cylinder::intersect(const Ray &ray) {
 		double sol4 = -(axis.dot(ray.O - c2)) / (axis.dot(ray.D));
 		Point q3 = ray.O + ray.D*sol3;
 		Point q4 = ray.O + ray.D*sol4;
-		if (sol3 >= 0 && (q3 - c1).length_2() <= pow(radius, 2)) {
+		if (sol3 >= e && (q3 - c1).length_2() - pow(radius, 2) <= e) {
 			//cout << "test1" << endl;
 			intersections.push_back(make_tuple(q3, sol3, false));
 		}
-		if (sol4 >= 0 && (q4 - c2).length_2() <= pow(radius, 2)) {
+		if (sol4 >= e && (q4 - c2).length_2() - pow(radius, 2) <= e) {
 			//cout << "test2" << endl;
 			intersections.push_back(make_tuple(q4, sol4, false));
 		}
@@ -105,7 +110,7 @@ Hit Cylinder::intersect(const Ray &ray) {
 	/*When hits a cylinder's cap*/
 	else {
 		//cout << "test2" << endl;
-		return ray.D.dot(axis) > 0 ? Hit(distance, -axis) : Hit(distance, axis);
+		return ray.D.dot(axis) > e ? Hit(distance, -axis) : Hit(distance, axis);
 	}
 
 }
