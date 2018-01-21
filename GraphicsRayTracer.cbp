@@ -35,6 +35,12 @@
 		<Unit filename="Plane.cpp" />
 		<Unit filename="Plane.h" />
 		<Unit filename="Triangle.cpp" />
+		<Unit filename="camera.cpp" />
+		<Unit filename="camera.h" />
+		<Unit filename="glm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="glm.h" />
 		<Unit filename="image.cpp" />
 		<Unit filename="image.h" />
 		<Unit filename="light.cpp" />

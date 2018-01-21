@@ -17,7 +17,7 @@
 #include "sphere.h"
 #include "Plane.h"
 #include "Triangle.h"
-#include "Cylinder.h"
+//#include "Cylinder.h"
 #include "material.h"
 #include "light.h"
 #include "image.h"
@@ -133,8 +133,8 @@ Object* Raytracer::parseObject(const YAML::Node& node)
 		node["center1"] >> p1;
 		node["center2"] >> p2;
 		node["radius"] >> r;
-		Cylinder *cyl = new Cylinder(p1, p2, r);
-		returnObject = cyl;
+		//Cylinder *cyl = new Cylinder(p1, p2, r);
+		//returnObject = cyl;
 	}
 
     //std::cout << "VertexIndices: " << model->triangles[k].vindices[0] << std::endl;
@@ -168,7 +168,6 @@ Object* Raytracer::parseObject(const YAML::Node& node)
 
             vertexTriangle = new Triangle(p1, p2, p3);
             vertexTriangle->material = parseMaterial(node["material"]);
-            std::cout << "material ka: " << vertexTriangle->material->ka << std::endl;
             scene->addObject(vertexTriangle);
 
         }
