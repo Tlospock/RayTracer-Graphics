@@ -72,7 +72,7 @@ Objects:
   angle: 90
   material:
     color: [1.0,0.8,0.0]
-    texture: C:\Users\A_Tlos\Documents\Code\RayTracer-Graphics\earthmap1k.png
+    texture: C:\Users\Tlos\Documents\Project\RayTracer-Graphics\earthmap1k.png
     ka: 0.2
     kd: 0.8
     ks: 0
@@ -95,14 +95,14 @@ Objects:
     kd: 0.8
     ks: 0
     n: 1
-- type: OBJModel
-  path: C:\Users\A_Tlos\Documents\Code\RayTracer-Graphics\3DObject\Gift.obj
-  position: [290,170,150]
-  radius: [50,[0,1,0.7]]
-  angle: 50
-  material: # red
-    color: [1.0,0.0,0.0]
-    ka: 0.2
-    kd: 0.7
-    ks: 0.8
-    n: 32
+#- type: OBJModel
+#  path: C:\Users\Tlos\Documents\Project\RayTracer-Graphics\3DObject\cube.obj
+#  position: [290,170,150]
+#  radius: [50,[0,1,0.7]]
+#  angle: 50
+#  material: # red
+#    color: [1.0,0.0,0.0]
+#    ka: 0.2
+#    kd: 0.7
+#    ks: 0.8
+#    n: 32
