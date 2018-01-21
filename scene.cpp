@@ -21,6 +21,7 @@
 
 Color Scene::trace(const Ray &ray, const int &depth)
 {
+
     // Find hit object and distance
     Hit min_hit(std::numeric_limits<double>::infinity(),Vector());
     Object *obj = NULL;
@@ -289,6 +290,7 @@ void Scene::render(Image &img)
     if(camera)
         eye = camera->eye;
 	#pragma omp parallel for
+	std::cout << "renderingNextEye" << std::endl;
     for (int y = 0; y < h; y++) {
         for (int x = 0; x < w; x++) {
 			Color col(0, 0, 0);
