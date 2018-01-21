@@ -23,7 +23,7 @@ Camera:
  eye: [200,200,1000]
  center: [200,200,0]
  up: [0,1.0,0]
- viewSize: [400,400]
+ viewSize: [600,600]
 
 renderMode: 0
 
@@ -40,35 +40,48 @@ Lights:
 
 Objects:
 - type: sphere
-  position: [90,320,100]
-  radius: 50
+  position: [200,370,250]
+  radius: 30
   material: # blue
     color: [0.0,0.0,1.0]
+    texture: C:\Users\A_Tlos\Documents\Code\RayTracer-Graphics\mars1k.png
     ka: 0.2
     kd: 0.7
     ks: 0.5
     n: 64
 - type: sphere
-  position: [210,270,300]
-  radius: 50
+  position: [200,50,250]
+  radius: 30
   material: # green
     color: [0.0,1.0,0.0]
+    texture: C:\Users\A_Tlos\Documents\Code\RayTracer-Graphics\jupitermap.png
     ka: 0.2
     kd: 0.3
     ks: 0.5
     n: 8
-#- type: sphere
-#  position: [290,170,150]
-#  radius: 50
-#  material: # red
-#    color: [1.0,0.0,0.0]
-#    ka: 0.2
-#    kd: 0.7
-#    ks: 0.8
-#    n: 32
 - type: sphere
-  position: [140,220,400]
-  radius: [50,[0,1,0.7]]
+  position: [75,150,250]
+  radius: 30
+  material: # red
+    color: [1.0,1.0,0.0]
+    texture: C:\Users\A_Tlos\Documents\Code\RayTracer-Graphics\neptunemap.png
+    ka: 0.2
+    kd: 0.7
+    ks: 0.8
+    n: 32
+- type: sphere
+  position: [330,150,250]
+  radius: 30
+  material: # red
+    color: [1.0,0.0,0.0]
+    texture: C:\Users\A_Tlos\Documents\Code\RayTracer-Graphics\venusmap.png	
+    ka: 0.2
+    kd: 0.7
+    ks: 0.8
+    n: 32
+- type: sphere
+  position: [330,270,250]
+  radius: [30,[0,1,0.7]]
   angle: 90
   material:
     color: [1.0,0.8,0.0]
@@ -78,31 +91,34 @@ Objects:
     ks: 0
     n: 1
 - type: sphere
-  position: [110,130,200]
-  radius: 50
+  position: [75,270,250]
+  radius: 30
   material: # orange
     color: [1.0,0.5,0.0]
+    texture: C:\Users\A_Tlos\Documents\Code\RayTracer-Graphics\mercurymap.png
     ka: 0.2
     kd: 0.8
     ks: 0.5
     n: 32
 - type: sphere
-  position: [200,200,-1000]
-  radius: 1000
-  material: # grey
-    color: [0.4,0.4,0.4]
+  position: [200,200,-2100]
+  radius: 2000
+  material: # grey-white
+    color: [0.5,0.5,0.5]
+    texture: C:\Users\A_Tlos\Documents\Code\RayTracer-Graphics\sunmap.png
     ka: 0.2
     kd: 0.8
     ks: 0
     n: 1
+#OBJModel
 - type: OBJModel
-  path: C:\Users\A_Tlos\Documents\Code\RayTracer-Graphics\3DObject\Gift.obj
-  position: [290,170,150]
-  radius: [50,[0,1,0.7]]
-  angle: 50
-  material: # red
-    color: [1.0,0.0,0.0]
-    ka: 0.2
-    kd: 0.7
-    ks: 0.8
+  path: C:\Users\A_Tlos\Documents\Code\RayTracer-Graphics\3DObject\zen5.obj
+  position: [200,100,250]
+  radius: 50
+  material: # metal
+    color: [0.52,0.6,0.6]
+#    texture: C:\Users\A_Tlos\Documents\Code\RayTracer-Graphics\zenTexture.png
+    ka: 0.3
+    kd: 0.3
+    ks: 1.0
     n: 32

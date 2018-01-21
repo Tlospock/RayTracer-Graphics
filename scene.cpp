@@ -17,6 +17,7 @@
 #include "scene.h"
 #include "material.h"
 #include <algorithm>
+#include <ctime>
 #include <cmath>
 
 Color Scene::trace(const Ray &ray, const int &depth)
@@ -285,11 +286,14 @@ void Scene::render(Image &img)
 {
     int w = img.width();
     int h = img.height();
+    int prog=0;
 
     /** Following website instructions: http://web.archive.org/web/20110317151403/http://www-graphics.stanford.edu/courses/cs348b-99/viewgeom.html */
     if(camera)
         eye = camera->eye;
-	std::cout << "renderingNextEye" << std::endl;
+
+    clock_t clockBegin = clock();
+	std::cout << "renderingNextEye: " << std::endl;
 	#pragma omp parallel for
     for (int y = 0; y < h; y++) {
         for (int x = 0; x < w; x++) {
@@ -322,7 +326,12 @@ void Scene::render(Image &img)
 			col.clamp();
             img(x,y) = col;
         }
+        //std::cout << y << " / " << h << std::endl;
     }
+
+    clock_t clockEnd = clock();
+    double elapsed_secs = double(clockEnd - clockBegin) / CLOCKS_PER_SEC;
+    std::cout << "Time: " << elapsed_secs << std::endl;
 }
 
 void Scene::addObject(Object *o)
