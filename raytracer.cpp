@@ -17,6 +17,7 @@
 #include "sphere.h"
 #include "Plane.h"
 #include "Triangle.h"
+#include "Cylinder.h"
 #include "material.h"
 #include "light.h"
 #include "image.h"
@@ -126,6 +127,15 @@ Object* Raytracer::parseObject(const YAML::Node& node)
 		Triangle *triangle = new Triangle(p1, p2, p3);
 		returnObject = triangle;
 	}
+	if (objectType == "cylinder") {
+		Point p1, p2;
+		double r;
+		node["center1"] >> p1;
+		node["center2"] >> p2;
+		node["radius"] >> r;
+		Cylinder *cyl = new Cylinder(p1, p2, r);
+		returnObject = cyl;
+	}
 
     //std::cout << "VertexIndices: " << model->triangles[k].vindices[0] << std::endl;
     //std::cout << "translateVertex indices: " << (model->triangles[k].vindices[0]-1)*3 << std::endl;
@@ -136,16 +146,13 @@ Object* Raytracer::parseObject(const YAML::Node& node)
 
         std::string path;
         node["path"] >> path;
-        char *pathChar = new char[path.length() + 1];
-        strcpy(pathChar, path.c_str());
-
-        GLMmodel* model = glmReadOBJ(pathChar);
+		GLMmodel* model = glmReadOBJ((char*)path.c_str());
         std::cout << "have a 3D model with " << model->numvertices << " vertex and " << model->numtriangles << " triangles" << std::endl;
 
         //std::cout << "VertexIndices: " << model->triangles[k].vindices[0] << std::endl;
-            //std::cout << "translateVertex indices: " << (model->triangles[k].vindices[0]-1)*3 << std::endl;
-            //std::cout << "VertexIndices: " << model->triangles[k].vindices[0] << " " << model->triangles[k].vindices[1] << " " << model->triangles[k].vindices[2] << std::endl;
-            //std::cout << "Vertex: " << model->vertices[(model->triangles[k].vindices[0])*3] << " " << model->vertices[(model->triangles[k].vindices[0])*3 +1] << " " << model->vertices[(model->triangles[k].vindices[0])*3+2] << std::endl;
+        //std::cout << "translateVertex indices: " << (model->triangles[k].vindices[0]-1)*3 << std::endl;
+        //std::cout << "VertexIndices: " << model->triangles[k].vindices[0] << " " << model->triangles[k].vindices[1] << " " << model->triangles[k].vindices[2] << std::endl;
+        //std::cout << "Vertex: " << model->vertices[(model->triangles[k].vindices[0])*3] << " " << model->vertices[(model->triangles[k].vindices[0])*3 +1] << " " << model->vertices[(model->triangles[k].vindices[0])*3+2] << std::endl;
 
         for(int k=0; k < model->numtriangles; ++k)
         {
@@ -168,7 +175,6 @@ Object* Raytracer::parseObject(const YAML::Node& node)
         std::cout << "number of objects " << scene->getNumObjects() << std::endl;
         /*Triangle *triangle = new Triangle();
         returnObject =*/
-        delete [] pathChar;
 	}
 
     if (returnObject) {
